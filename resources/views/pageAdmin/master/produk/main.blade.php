@@ -1,21 +1,6 @@
 @extends('layoutMaster.main')
 @push('style')
 <style type="text/css">
-	.feather-19{
-		stroke-width: 4px;
-		width: 19px;
-		height: 19px;
-	}
-	.card-header{
-		border-radius: 8px 8px 0 0 !important;
-		border-bottom: 1px solid #e1e1e1;
-	}
-	.card{
-		border-radius: 10px 10px 11px 11px;
-	}
-	.card-body{
-		border-radius: 0px 0px 8px 8px;
-	}
 	div.dataTables_wrapper {
 		width: 95%;
 		margin: 0 auto;
@@ -24,30 +9,45 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 @endpush
 @section('content')
-	<div class="container-fluid p-0">
-		<h1 class="h3 mb-3"><strong>Produk</strong></h1>
-
-		<div id="main-layer">
-			<div class="card">
-				<div class="card-header text-end">
-					<button class=" btn btn-primary btn-add" type="button">
-						<i class="align-middle feather-19" data-feather="plus"></i> Tambah Produk
-					</button>
-				</div>
-				<div class="card-body">
-					<table id="dataTable" class="table table-striped dataTable display nowrap" style="width: 100%;">
-						<thead>
-							<th>S.No</th>  
-							<th>Name</th>  
-							<th>Age</th>  
-							<th>City</th>  
-							<th>State</th>  
-						</thead>
-					</table>
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">Dashboard v3</h1>
+				</div><!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item active">Dashboard v3</li>
+					</ol>
 				</div>
 			</div>
 		</div>
-		<div id="other-page"></div>
+	</div>
+	<div class="content">
+		<div class="container-fluid">
+				<div id="main-layer">
+					<div class="card">
+						<div class="card-header text-right">
+							<button class=" btn btn-primary btn-add" type="button">
+								<i class="align-middle feather-19" data-feather="plus"></i> Tambah Produk
+							</button>
+						</div>
+						<div class="card-body">
+							<table id="dataTable" class="table table-striped dataTable display nowrap" style="width: 100%;">
+								<thead>
+									<th>S.No</th>  
+									<th>Name</th>  
+									<th>Age</th>  
+									<th>City</th>  
+									<th>State</th>  
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="other-page"></div>
+		</div>
 	</div>
 @endsection
 @push("script")

@@ -1,33 +1,19 @@
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-<meta name="author" content="AdminKit">
-<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rad Toys Rental</title>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="shortcut icon" href="{{asset('assets/admin/img/icons/icon-48x48.png')}}" />
-<link rel="canonical" href="https://demo-basic.adminkit.io/" />
-<link href="{{asset('assets/admin/css/app.css')}}" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-<style type="text/css">
-	.feather-22{
-		width: 22px;
-		height: 22px;
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="{{asset('assets/admin/plugins/fontawesome-free/css/all.min.css')}}">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="{{asset('assets/admin/css/adminlte.min.css')}}">
+{{-- <style type="text/css">
+	.layout-fixed .main-sidebar{
+		bottom: 0;
+    float: none;
+    left: 0;
+    position: fixed;
+    top: 0;
 	}
-	.ft-size{
-		font-size: 14px;
-	}
-	.links{
-		padding: 0 1.625rem !important;
-	}
-	.submenu{
-		list-style: none; 
-	}
-	.form-control:focus{
-		border-color: ;
-	}
-</style>
+</style> --}}
 @stack('style')
