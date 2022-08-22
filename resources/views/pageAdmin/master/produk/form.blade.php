@@ -1,3 +1,24 @@
+<style type="text/css">
+	#customFile .custom-file-input:lang(en)::after {
+		content: "Select file...";
+	}
+
+	#customFile .custom-file-input:lang(en)::before {
+		content: "Click me";
+	}
+
+/*when a value is selected, this class removes the content */
+.custom-file-input.selected:lang(en)::after {
+	content: "" !important;
+}
+
+.custom-file {
+	overflow: hidden;
+}
+.custom-file-input {
+	white-space: nowrap;
+}
+</style>
 <div class="card">
 	<div class="card-header">
 		<div class="card-title">
@@ -16,9 +37,12 @@
 						<label for="exampleInputEmail1" class="form-label">Nama Barang<span style="color: red;">*</span></label>
 						<input type="text" class="form-control" id="namaBarang">
 					</div>
-					<div class="mb-3">
-						<label for="formFile" class="form-label">Upload Gambar</label>
-						<input class="form-control" type="file" id="formFile">
+					<div class="mb-3 mt-3">
+						<label class="form-label" for="gambar">Upload Gambar </label>
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="gambar" lang="in">
+							<label class="custom-file-label" for="customFileLang">Pilih Gambar </label>
+						</div>
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputPassword1" class="form-label">Harga Barang<span style="color: red;">*</span></label>
@@ -26,7 +50,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12 text-end mt-3">
+			<div class="col-md-12 text-right mt-3">
 				<button class="btn btn-danger btn-cancel" type="button">Kembali</button>
 				<button class="btn btn-success btn-simpan">Simpan</button>
 			</div>
@@ -35,6 +59,11 @@
 </div>
 
 <script>
+	document.querySelector('.custom-file-input').addEventListener('change',function(e){
+		var fileName = document.getElementById("gambar").files[0].name;
+		var nextSibling = e.target.nextElementSibling
+		nextSibling.innerText = fileName
+	})
 	$(".btn-cancel").click(function(e){
 		e.preventDefault()
 		$("#other-page").fadeOut(function(){

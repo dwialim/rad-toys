@@ -84,10 +84,9 @@
 		$("#main-layer").hide()
 		$.post("{{route('addProduk')}}").done(function(data){
 			if(data.status=="success"){
-				// $(".other-page").html(data)
 				$("#other-page").html(data.data).fadeIn()
 			}else{
-				console.log('gagal nih')
+				$("#main-layer").show()
 			}
 		})
 	})
