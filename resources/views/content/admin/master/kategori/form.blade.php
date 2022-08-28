@@ -52,7 +52,6 @@
 
 	$(".btn-simpan").click(function(e){
 		e.preventDefault()
-		var a = $('#kodeKategori').val()
 		$(".btn-simpan").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...').attr("disabled",true)
 		$('#kodeKategori').prop('disabled',false)
 		var data = new FormData($('.formSave')[0])

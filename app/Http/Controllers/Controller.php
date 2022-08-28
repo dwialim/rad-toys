@@ -36,7 +36,7 @@ class Controller extends BaseController{
 			->first();
 
 		if($data){
-			$num = (int)substr($data->kode_kategori,8);
+			$num = (int)substr($data->kode_barang,12);
 		}
 		$nextKode = 'KP-'.date('Ymd'.'-'.sprintf("%04d",(string)$num+1));
 		return $nextKode;

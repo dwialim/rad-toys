@@ -4,79 +4,99 @@
 		-webkit-box-shadow: unset !important;
 	}
 </style>
-<link rel="stylesheet" href="{{asset('assets/admin/plugins/select2/css/select2.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 
 <div class="card card-info">
 	<div class="card-header">
 		<h3 class="card-title">Form Tambah Produk</h3>
 	</div>
-	<form id="form-save">
-		<div class="card-body">
-			<div class="row">
-				<div class="col-md-12">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<form class="formSave">
 					<div class="form-group row mb-3">
-						<label for="kodeBarang" class="col-sm-2 col-form-label">Kode Barang</label>
+						<label for="kodeProduk" class="col-sm-2 col-form-label">Kode Produk</label>
 						<div class="col-sm-12">
-							<input type="text" class="form-control" id="kodeBarang" disabled readonly>
+							<input type="text" name="kodeProduk" class="form-control" id="kodeProduk" disabled readonly>
 						</div>
 					</div>
 					<div class="form-group row mb-3">
-						<label for="namaBarang" class="col-sm-2 col-form-label">Nama Barang<span class="text-red">*</span></label>
+						<label for="namaProduk" class="col-sm-2 col-form-label">Nama Produk<span class="text-red">*</span></label>
 						<div class="col-sm-12">
-							<input type="text" class="form-control" id="namaBarang" placeholder="nama barang">
+							<input type="text" name="namaProduk" class="form-control" id="namaProduk" placeholder="nama Produk">
 						</div>
 					</div>
 					<div class="form-group row mb-3">
-						<label for="kategoriBarang" class="col-sm-2 col-form-label">Kategori Barang<span class="text-red">*</span></label>
-						<div class="col-sm-12">
-							<select class="form-control" id="kategoriBarang">
-								<option value="first" selected disabled>--Pilih Kategori--</option>
-								@if(!empty($kategori))
-								@foreach($kategori as $key => $val)
-									<option value="{{$val->id}}">{{$val->nama_kategori}}</option>
-								@endforeach
-								@endif
-							</select>
+						<div class="col-sm-6 mb-2">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="kategoriProduk" class="col-form-label">Kategori Produk<span class="text-red">*</span></label>
+									<select class="form-control" name="kategoriProduk" id="kategoriProduk">
+										<option value="first" selected disabled>--Pilih Kategori--</option>
+										@if(!empty($kategori))
+										@foreach($kategori as $key => $val)
+										<option value="{{$val->id}}">{{$val->nama_kategori}}</option>
+										@endforeach
+										@endif
+									</select>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="form-group row mb-3">
-						<label for="customFile" class="col-sm-2">Upload Gambar</label>
-						<div class="col-sm-12">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="customFile">
-								<label class="custom-file-label" for="customFile">Pilih Gambar</label>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="customFile" class="col-form-label">Upload Gambar</label>
+									<div class="custom-file">
+										<input type="file" name="image" class="custom-file-input" id="customFile">
+										<label class="custom-file-label" for="customFile">Pilih Gambar</label>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="form-group row mb-3">
-						<label for="hargaBarang" class="col-sm-2 col-form-label">Harga Barang<span class="text-red">*</span></label>
-						<div class="col-sm-12">
-							<input type="text" onkeyup="ubahFormat(this)" class="form-control" id="hargaBarang" placeholder="harga barang">
+						<div class="col-sm-6 mb-2">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="qtyProduk" class="col-form-label">QTY Produk<span class="text-red">*</span></label>
+									<input type="number" name="qtyProduk" class="form-control" id="qtyProduk" placeholder="QTY Produk" min="0">
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="hargaProduk" class="col-form-label">Harga Produk<span class="text-red">*</span></label>
+									<input type="text" name="hargaProduk" onkeyup="ubahFormat(this)" class="form-control" id="hargaProduk" placeholder="harga Produk">
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-12 text-right mt-3">
-				<button class="btn btn-danger btn-cancel" type="button">Kembali</button>&nbsp; 
-				<button class="btn btn-success btn-simpan">Simpan</button>
+				</form>
 			</div>
 		</div>
-	</form>
+		<div class="col-md-12 text-right mt-3">
+			<button class="btn btn-danger btn-cancel" type="button">Kembali</button>&nbsp; 
+			<button class="btn btn-success btn-simpan">Simpan</button>
+		</div>
+	</div>
 </div>
 
-<script src="{{asset('assets/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/select2/js/select2.full.min.js')}}"></script>
 <script>
 	$(document).ready(()=>{
 		var kode = `{{$kode}}`
-		$("#kodeBarang").val(kode)
+		$("#kodeProduk").val(kode)
 	})
 	$(function () {
 		bsCustomFileInput.init();
 	});
 
-	$('#kategoriBarang').select2({
+	$("#qtyProduk").keypress(function(e){
+		if(e.which!=8 && isNaN(String.fromCharCode(e.which))){
+			e.preventDefault()
+		}
+	})
+
+	$('#kategoriProduk').select2({
 		theme:'bootstrap4'
 	})
 
@@ -95,12 +115,63 @@
 	$(".btn-simpan").click(function(e){
 		e.preventDefault()
 		$(".btn-simpan").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...').attr("disabled",true)
-		
-		$(".btn-simpan").attr("disabled",false)
+		$("#kodeProduk").prop("disabled",false)
+		var data = new FormData($(".formSave")[0])
+		$.ajax({
+			url: "{{route('saveProduk')}}",
+			type: 'POST',
+			data: data,
+			async: true,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data){
+				if(data.status=="success"){
+					Swal.fire({
+						title: "Berhasil!",
+						text: data.message,
+						icon: data.status,
+						timer: 1300,
+						showCancelButton: false,
+						showConfirmButton: false,
+					})
+					$("#other-page").fadeOut(()=>{
+						$("#other-page").empty()
+						$("#main-layer").fadeIn()
+						$("#dataTable").DataTable().ajax.reload()
+					})
+				}else if(data.status=="error"){
+					Swal.fire('Whoops !', data.message, data.status);
+					$(".btn-simpan").html("Simpan").attr("disabled",false)
+				}else{
+					var n = 0
+					// var a = $("#customFile").rules("add",{
+					// 	accept: "jpg|jpeg|png"
+					// })
+					console.log(data)
+					for(key in data){
+						var name = key
+						if(name=="namaProduk"){
+							name = "Nama Produk"
+						}else if(name=="kategoriProduk"){
+							name = "Kategori Produk"
+						}else if(name=="qtyProduk"){
+							name = "QTY Produk"
+						}else{
+							name = "Harga Produk"
+						}
+						n++
+					}
+					Swal.fire('Whoops !', name + ' Tidak Boleh Kosong!!', 'error')
+					$(".btn-simpan").html("Simpan").prop("disabled",false)
+				}
+			}
+		})
+		$(".btn-simpan").html("Simpan").attr("disabled",false)
 	})
 
 	function ubahFormat(val){
-		$("#hargaBarang").val(formatRupiah(val.value,"Rp. "))
+		$("#hargaProduk").val(formatRupiah(val.value,"Rp. "))
 	}
 
 	function formatRupiah(angka, prefix) {

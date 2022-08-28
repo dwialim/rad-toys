@@ -14,6 +14,8 @@ Route::group(['prefix'=>'master'],function(){
 	Route::group(['prefix'=>'produk'],function(){
 		Route::get('/',[produkController::class, 'main'])->name('produk');
 		Route::post('/form',[produkController::class, 'form'])->name('addProduk');
+		Route::post('/save',[produkController::class, 'save'])->name('saveProduk');
+		Route::post('/getProduk',[produkController::class, 'getProduk'])->name('getProduk');
 	});
 
 	Route::group(['prefix'=>'kategori'],function(){
