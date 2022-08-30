@@ -75,9 +75,7 @@
 				{data:"kode_barang", name:"kode_barang", render:function(data,type,row){
 					return  "<p class='text-center' style='margin:0;'>"+data+"</p>"
 				}},
-				{data:"nama_barang", name:"nama_barang", render:function(data,type,row){
-					return  "<p class='text-center' style='margin:0;'>"+data+"</p>"
-				}},
+				{data:"nama", name:"nama"},
 				{data:"qty", name:"qty", render:function(data,type,row){
 					return  "<p class='text-center' style='margin:0;'>"+data+"</p>"
 				}},
@@ -101,15 +99,35 @@
 
 	$(".btn-add").click(function(){
 		$("#main-layer").hide()
-		$.post("{{route('addProduk')}}").done(function(data){
+		$.post("{{route('formProduk')}}").done(function(data){
 			if(data.status=="success"){
-				// $(".other-page").html(data)
 				$("#other-page").html(data.data).fadeIn()
 			}else{
-				console.log('gagal nih')
+				$("#other-page").empty()
+				$("#main-layer").show()
 			}
 		})
 	})
+
+	function detail(id){
+		console.log(id)
+	}
+
+	function updated(id){
+		$("#main-layer").hide()
+		$.post("{{route('formProduk')}}",{id:id}).done((data)=>{
+			if(data.status=="success"){
+				$("#other-page").html(data.data).fadeIn()
+			}else{
+				$("#other-page").empty()
+				$("#main-layer").show()
+			}
+		})
+	}
+
+	function deleted(id){
+		console.log(id)
+	}
 
 	function formatRupiah(angka, prefix) {
 		// var number_string = angka.replace(/[^,\d]/g, "").toString()
