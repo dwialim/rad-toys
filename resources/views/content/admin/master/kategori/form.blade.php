@@ -1,28 +1,33 @@
 <style type="text/css">
-	.select2-container--bootstrap4.select2-container--focus .select2-selection{
+	/*.select2-container--bootstrap4.select2-container--focus .select2-selection{
 		border-color: #ced4da !important;
 		-webkit-box-shadow: unset !important;
+	}*/
+	.form-control::placeholder {
+		color: #495057;
+		opacity: 0.7;
 	}
 </style>
 
 <div class="card card-info">
 	<div class="card-header">
-		<h3 class="card-title">Form Tambah Produk</h3>
+		<h3 class="card-title">Form Tambah Kategori</h3>
 	</div>
 	<div class="card-body">
 		<div class="row">
 			<div class="col-md-12">
 				<form class="formSave">
+					<input type="hidden" name="id" value="{{!empty($data)?$data->id:''}}">
 					<div class="form-group row mb-3">
 						<label for="kodeBarang" class="col-sm-2 col-form-label">Kode Kategori</label>
 						<div class="col-sm-12">
-							<input type="text" name="kodeKategori" class="form-control" id="kodeKategori" disabled readonly>
+							<input type="text" name="kodeKategori" class="form-control" id="kodeKategori" placeholder="{{(!empty($data))?$data->kode_kategori:$kode}}" disabled readonly>
 						</div>
 					</div>
 					<div class="form-group row mb-3">
 						<label for="namaKategori" class="col-sm-2 col-form-label">Nama Kategori<span class="text-red">*</span></label>
 						<div class="col-sm-12">
-							<input type="text" name="namaKategori" class="form-control" id="namaKategori" placeholder="nama kategori">
+							<input type="text" name="namaKategori" class="form-control" id="namaKategori" value="{{(!empty($data))?$data->nama_kategori:''}}" placeholder="nama kategori">
 						</div>
 					</div>
 				</form>
@@ -37,11 +42,6 @@
 
 <script src="{{asset('assets/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <script>
-	$(document).ready(function(){
-		var kode = `{{$kode}}`
-		$('#kodeKategori').val(kode)
-	})
-
 	$(".btn-cancel").click(function(e){
 		e.preventDefault()
 		$("#other-page").fadeOut(function(){
@@ -53,8 +53,10 @@
 	$(".btn-simpan").click(function(e){
 		e.preventDefault()
 		$(".btn-simpan").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...').attr("disabled",true)
-		$('#kodeKategori').prop('disabled',false)
+		// $('#kodeKategori').prop('disabled',false)
+		var kode = $("#kodeKategori").attr("placeholder")
 		var data = new FormData($('.formSave')[0])
+		data.append('kodeKategori',kode)
 		$.ajax({
 			url: '{{route('saveKategori')}}',
 			type: 'POST',
@@ -92,7 +94,7 @@
 						}
 						n++
 					}
-					Swal.fire('Whoops !', 'Kolom ' + dt0 + ' Tidak Boleh Kosong !!', 'error')
+					Swal.fire('Whoops !', dt0 + ' Tidak Boleh Kosong !!', 'error')
 					$(".btn-simpan").html("Simpan").prop("disabled",false)
 				}
 			}

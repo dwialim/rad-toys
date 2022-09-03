@@ -8,12 +8,14 @@ use App\Models\Produk;
 use App\Models\Kategori;
 use DataTables, Validator;
 
-class produkController extends Controller{
+class stokProdukController extends Controller{
 	public function main(){
-		return view('content.admin.master.produk.main');
+		return view('content.admin.stokProduk.main');
 	}
 
 	public function form(Request $request){
+		// return $request->all();
+		$data['kategori'] = Kategori::all();
 		if(!isset($request->id)){
 			$data['kode'] = $this->kodeProduk();
 			$data['data'] = '';
@@ -30,16 +32,30 @@ class produkController extends Controller{
 	public function save(Request $request){
 		// return $request->all();
 		$rules = [
+			'hargaProduk' => 'required',
+			'qtyProduk' => 'required',
+			'image' => 'image|file|mimes:jpeg,jpg,png|max:2048',
+			'kategoriProduk' => 'required',
 			'namaProduk' => 'required',
 		];
 		$messages = [
 			'required' => 'Kolom Harus Diisi!',
 		];
 		$validator = Validator::make($request->all(),$rules,$messages);
+
 		if(!$validator->fails()){
+			$image = $request->file('image');
+
 			$produk = new Produk;
-			$produk->kode_produk = $request->kodeProduk;
-			$produk->nama_produk = $request->namaProduk;
+			$produk->kategori_id = $request->kategoriProduk;
+			$produk->kode_barang = $request->kodeProduk;
+			$produk->nama_barang = $request->namaProduk;
+			if(!empty($image)){
+				$path = $image->store('produk-image');
+				$produk->foto = $path;
+			}
+			$produk->qty   = $request->qtyProduk;
+			$produk->harga = preg_replace("/\D+/", "", $request->hargaProduk);
 			$produk->save();
 			if($produk){
 				return ['status'=>'success','message'=>'Produk Berhasil Disimpan!'];
@@ -53,7 +69,7 @@ class produkController extends Controller{
 
 	public function getProduk(Request $request){
 		if(request()->ajax()){
-			$data = Produk::orderBy('kode_produk','asc')->get();
+			$data = Produk::all();
 			return DataTables::of($data)
 				->addIndexColumn()
 				->addColumn('action',function($row){
@@ -67,41 +83,25 @@ class produkController extends Controller{
 						</div>";
 					return $btn;
 				})
-				->addColumn('kode',function($row){
-					$txt = "
-						<p class='text-center' style='margin:0;'>".$row->kode_produk."</p>";
-					return $txt;
-				})
 				->addColumn('nama',function($row){
 					$txt = "
 						<div class='row'>
 							<div class='col-sm-3'>
 							</div>
-							<div class='col-sm-9'>".ucwords($row->nama_produk)."</div>
+							<div class='col-sm-9'>".ucwords($row->nama_barang)."</div>
 						</div>";
 					return $txt;
 				})
-            ->rawColumns(['kode','nama','action'])
-            ->make(true);
-      }
-   }
+				->rawColumns(['nama','action'])
+				->make(true);
+		}
+	}
 
-   public function destroy(Request $request){
-   		$id = $request->id;
-   		$data = Produk::find($id);
-   		if($data){
-   			$data->delete();
-   			return ['status'=>'success','message'=>'Data Berhasil Dihapus!'];
-   		}else{
-   			return ['status'=>'error','message'=>'Data Gagal Dihapus!'];
-   		}
-   }
-
-   public function detail(Request $request){
-   	$data['kategori'] = Kategori::all();
+	public function detail(Request $request){
+		$data['kategori'] = Kategori::all();
 		$data['data'] = Produk::where('id',$request->id)->first();
 		$data['page'] = 'Detail';
 		$content = view("content.admin.master.produk.detail",$data)->render();
 		return ["status"=>"success","message"=>"Data berhasil diambil","data"=>$content];
-   }
+	}
 }

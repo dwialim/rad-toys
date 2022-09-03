@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProduksTable extends Migration
+class CreateStokProduksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateProduksTable extends Migration
      */
     public function up()
     {
-        Schema::create('produks', function (Blueprint $table) {
+        Schema::create('stok_produks', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_produk');
-            $table->string('nama_produk');
+            $table->foreignId('kategori_id');
+            $table->foreignId('produk_id');
+            $table->string('kode_stok');
+            $table->string('foto')->nullable();
+            $table->integer('qty')->nullable();
+            $table->integer('harga');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateProduksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produks');
+        Schema::dropIfExists('stok_produks');
     }
 }

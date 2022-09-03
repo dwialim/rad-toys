@@ -17,28 +17,51 @@ class Controller extends BaseController{
 		$num = 0;
 		$data = Kategori::select('kode_kategori')
 			->where('kode_kategori','LIKE',"%$year%")
-			->orderBy('kode_kategori','desc')
-			->first();
-
+			->orderBy('kode_kategori','asc')
+			->get();
 		if($data){
-			$num = (int)substr($data->kode_kategori,8);
+			$cek = 0;
+			$pat = []; // array pattern
+			$notPat = []; // array tidak pattern
+			foreach($data as $key => $val){
+				$getNum = (int)substr($val->kode_kategori,8);
+				$cek++;
+				if($cek!=$getNum){
+					array_push($notPat,$getNum); // mulai tidak pattern
+				}else{
+					array_push($pat,$getNum); // jika masih pattern
+				}
+			}
+			$num = (int)end($pat); // ambil array pattern index terakhir
 		}
-		$nextKode = 'KR-'.date('Y'.'-'.sprintf("%04d",(string)$num+1));
+		$nextKode = 'KR-'.date('Y'.'-'.sprintf("%03d",(string)$num+1));
 		return $nextKode;
 	}
 
 	public function kodeProduk(){
-		$date = date("Ym");
+		$year = date("Ym");
 		$num = 0;
-		$data = Produk::select('kode_barang')
-			->where('kode_barang','LIKE',"%$date%")
-			->orderBy('kode_barang','desc')
-			->first();
+		$data = Produk::select('kode_produk')
+			->where('kode_produk','LIKE',"%$year%")
+			->orderBy('kode_produk','asc')
+			->get();
 
 		if($data){
-			$num = (int)substr($data->kode_barang,12);
+			$cek = 0;
+			$pat = [];
+			$notPat = [];
+			foreach($data as $key => $val){
+				$getNum = (int)substr($val->kode_produk,10);
+				$cek++;
+				if($cek!=$getNum){
+					array_push($notPat,$getNum);
+				}else{
+					array_push($pat,$getNum);
+				}
+			}
+			$num = (int)end($pat);
 		}
-		$nextKode = 'KP-'.date('Ymd'.'-'.sprintf("%04d",(string)$num+1));
+		$nextKode = 'KP-'.date('Ym'.'-'.sprintf("%03d",(string)$num+1));
 		return $nextKode;
 	}
 }

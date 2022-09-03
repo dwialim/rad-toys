@@ -3,10 +3,6 @@
 		border-color: #ced4da !important;
 		-webkit-box-shadow: unset !important;
 	}
-	.form-control::placeholder {
-		color: #495057;
-		opacity: 0.7;
-	}
 </style>
 
 <?php
@@ -29,13 +25,61 @@
 					<div class="form-group row mb-3">
 						<label for="kodeProduk" class="col-sm-2 col-form-label">Kode Produk</label>
 						<div class="col-sm-12">
-							<input type="text" name="kodeProduk" class="form-control" id="kodeProduk" placeholder="{{!empty($data)?$data->kode_produk:$kode}}" disabled readonly>
+							<input type="text" name="kodeProduk" class="form-control" id="kodeProduk" placeholder="{{!empty($data)?$data->kode_barang:$kode}}" disabled readonly>
 						</div>
 					</div>
 					<div class="form-group row mb-3">
 						<label for="namaProduk" class="col-sm-2 col-form-label">Nama Produk<span class="text-red">*</span></label>
 						<div class="col-sm-12">
 							<input type="text" name="namaProduk" class="form-control" id="namaProduk" placeholder="nama Produk" value="{{!empty($data)?$data->nama_barang:''}}">
+						</div>
+					</div>
+					<div class="form-group row mb-3">
+						<div class="col-sm-6 mb-2">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="kategoriProduk" class="col-form-label">Kategori Produk<span class="text-red">*</span></label>
+									<select class="form-control" name="kategoriProduk" id="kategoriProduk">
+										<option value="first" selected disabled>--Pilih Kategori--</option>
+										@if(!empty($kategori))
+										@foreach($kategori as $key => $val)
+										<option value="{{$val->id}}" @if(!empty($data)){{$data->kategori_id==$val->id?'selected':''}}@endif>
+											{{$val->nama_kategori}}
+										</option>
+										@endforeach
+										@endif
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="customFile" class="col-form-label">Upload Gambar</label>
+									<div class="custom-file">
+										<input type="file" name="image" class="custom-file-input" id="customFile">
+										<label class="custom-file-label" for="customFile">Pilih Gambar</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row mb-3">
+						<div class="col-sm-6 mb-2">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="qtyProduk" class="col-form-label">QTY Produk<span class="text-red">*</span></label>
+									<input type="number" name="qtyProduk" class="form-control" id="qtyProduk" placeholder="QTY Produk" min="0" value="{{!empty($data)?$data->qty:''}}">
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="hargaProduk" class="col-form-label">Harga Produk<span class="text-red">*</span></label>
+									<input type="text" name="hargaProduk" onkeyup="ubahFormat(this)" class="form-control" id="hargaProduk" placeholder="harga Produk" value="{{!empty($data)?rupiah($data->harga):''}}">
+								</div>
+							</div>
 						</div>
 					</div>
 				</form>
@@ -49,6 +93,24 @@
 </div>
 
 <script>
+	$(function () {
+		bsCustomFileInput.init();
+	});
+
+	$("#qtyProduk").keypress(function(e){
+		if(e.which!=8 && isNaN(String.fromCharCode(e.which))){
+			e.preventDefault()
+		}
+	})
+
+	$('#kategoriProduk').select2({
+		theme:'bootstrap4'
+	})
+
+	$(document).on('select2:open',()=>{
+		document.querySelector('.select2-search__field').focus()
+	})
+
 	$(".btn-cancel").click(function(e){
 		e.preventDefault()
 		$("#other-page").fadeOut(function(){
