@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Produk;
+use App\Models\StokProduk;
 use DataTables, Validator;
 
 class stokProdukController extends Controller{
@@ -14,29 +15,28 @@ class stokProdukController extends Controller{
 	}
 
 	public function form(Request $request){
-		// return $request->all();
 		$data['kategori'] = Kategori::all();
+		$data['produk'] = Produk::all();
 		if(!isset($request->id)){
-			$data['kode'] = $this->kodeProduk();
+			$data['kode'] = $this->kodeStok();
 			$data['data'] = '';
 			$data['page'] = 'Tambah';
 		}else{
 			$data['kode'] = '';
-			$data['data'] = Produk::where('id',$request->id)->first();
+			$data['data'] = StokProduk::where('id',$request->id)->first();
 			$data['page'] = 'Edit';
 		}
-		$content = view("content.admin.master.produk.form",$data)->render();
+		$content = view("content.admin.stokProduk.form",$data)->render();
 		return ["status"=>"success","message"=>"Data berhasil diambil","data"=>$content];
 	}
 
 	public function save(Request $request){
-		// return $request->all();
 		$rules = [
-			'hargaProduk' => 'required',
-			'qtyProduk' => 'required',
-			'image' => 'image|file|mimes:jpeg,jpg,png|max:2048',
+			'hargaProduk'    => 'required',
+			'qtyProduk'      => 'required',
+			'image'          => 'image|file|mimes:jpeg,jpg,png|max:2048',
 			'kategoriProduk' => 'required',
-			'namaProduk' => 'required',
+			'namaProduk'     => 'required',
 		];
 		$messages = [
 			'required' => 'Kolom Harus Diisi!',
@@ -46,30 +46,49 @@ class stokProdukController extends Controller{
 		if(!$validator->fails()){
 			$image = $request->file('image');
 
-			$produk = new Produk;
-			$produk->kategori_id = $request->kategoriProduk;
-			$produk->kode_barang = $request->kodeProduk;
-			$produk->nama_barang = $request->namaProduk;
-			if(!empty($image)){
-				$path = $image->store('produk-image');
-				$produk->foto = $path;
-			}
-			$produk->qty   = $request->qtyProduk;
-			$produk->harga = preg_replace("/\D+/", "", $request->hargaProduk);
-			$produk->save();
-			if($produk){
-				return ['status'=>'success','message'=>'Produk Berhasil Disimpan!'];
+			if(!isset($request->id)){
+				$stok = new StokProduk;
+				$stok->kode_stok = $request->kodeStok;
 			}else{
-				return ['status'=>'error','message'=>'Produk Gagal Disimpan!'];
+				$stok = StokProduk::find($request->id);
+			}
+			if(!empty($image)){
+				if(!empty($stok->foto)&&file_exists(public_path().'/storage/'.$stok->foto)){
+					$unlinkPath = public_path().'/storage/'.$stok->foto;
+					unlink($unlinkPath);
+				}
+				$path       = $image->store('produk-image');
+				$stok->foto = $path;
+			}
+			if($stok->qty==$stok->qty_awal){
+				$stok->qty_awal = $request->qtyProduk;
+			}
+			$stok->kategori_id = $request->kategoriProduk;
+			$stok->produk_id   = $request->namaProduk;
+			$stok->qty         = $request->qtyProduk;
+			$stok->harga       = preg_replace("/\D+/", "", $request->hargaProduk);
+			$stok->save();
+			if($stok){
+				if(!isset($request->id)){
+					return ['status'=>'success','message'=>'Stok Berhasil Disimpan!'];
+				}else{
+					return ['status'=>'success','message'=>'Stok Berhasil Diperbarui!'];
+				}
+			}else{
+				if(!isset($request->id)){
+					return ['status'=>'error','message'=>'Stok Gagal Disimpan!'];
+				}else{
+					return ['status'=>'error','message'=>'Stok Gagal Diperbarui!'];
+				}
 			}
 		}else{
 			return $validator->messages();
 		}
 	}
 
-	public function getProduk(Request $request){
+	public function getStok(Request $request){
 		if(request()->ajax()){
-			$data = Produk::all();
+			$data = StokProduk::with(['kategori','produk'])->get();
 			return DataTables::of($data)
 				->addIndexColumn()
 				->addColumn('action',function($row){
@@ -83,25 +102,34 @@ class stokProdukController extends Controller{
 						</div>";
 					return $btn;
 				})
+				->addColumn('kode',function($row){
+					$txt = "<p class='text-center' style='margin:0;'>".$row->kode_stok."</p>";
+					return $txt;
+				})
 				->addColumn('nama',function($row){
 					$txt = "
 						<div class='row'>
 							<div class='col-sm-3'>
 							</div>
-							<div class='col-sm-9'>".ucwords($row->nama_barang)."</div>
+							<div class='col-sm-9'>".ucwords($row->produk->nama_produk)."</div>
 						</div>";
 					return $txt;
 				})
-				->rawColumns(['nama','action'])
+				->addColumn('kategori', function($row){
+					$txt = "<p class='text-center' style='margin:0;'>".$row->kategori->nama_kategori."</p>";
+					return $txt;
+				})
+				->rawColumns(['nama','kode','action','kategori'])
 				->make(true);
 		}
 	}
 
 	public function detail(Request $request){
 		$data['kategori'] = Kategori::all();
-		$data['data'] = Produk::where('id',$request->id)->first();
+		$data['produk'] = Produk::all();
+		$data['data'] = StokProduk::where('id',$request->id)->first();
 		$data['page'] = 'Detail';
-		$content = view("content.admin.master.produk.detail",$data)->render();
+		$content = view("content.admin.stokProduk.detail",$data)->render();
 		return ["status"=>"success","message"=>"Data berhasil diambil","data"=>$content];
 	}
 }

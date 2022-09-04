@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\StokProduk;
 
 class Controller extends BaseController{
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -62,6 +63,33 @@ class Controller extends BaseController{
 			$num = (int)end($pat);
 		}
 		$nextKode = 'KP-'.date('Ym'.'-'.sprintf("%03d",(string)$num+1));
+		return $nextKode;
+	}
+
+	public function kodeStok(){
+		$year = date("Ym");
+		$num = 0;
+		$data = StokProduk::select('kode_stok')
+			->where('kode_stok','LIKE',"%$year%")
+			->orderBy('kode_stok','asc')
+			->get();
+
+		if($data){
+			$cek = 0;
+			$pat = [];
+			$notPat = [];
+			foreach($data as $key => $val){
+				$getNum = (int)substr($val->kode_stok,10);
+				$cek++;
+				if($cek!=$getNum){
+					array_push($notPat,$getNum);
+				}else{
+					array_push($pat,$getNum);
+				}
+			}
+			$num = (int)end($pat);
+		}
+		$nextKode = 'KS-'.date('Ym'.'-'.sprintf("%03d",(string)$num+1));
 		return $nextKode;
 	}
 }

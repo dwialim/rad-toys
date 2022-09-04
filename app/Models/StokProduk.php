@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Produk extends Model
+class StokProduk extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,7 @@ class Produk extends Model
         return $this->belongsTo(Kategori::class);
     }
 
-    public function stokProduk(){
-        return $this->hasMany(StokProduk::Class);
+    public function produk(){
+        return $this->belongsTo(Produk::class);
     }
 }

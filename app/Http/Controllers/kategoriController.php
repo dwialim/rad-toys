@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kategori;
+use App\Models\StokProduk;
 use DataTables, Validator;
 
 
@@ -55,24 +56,26 @@ class kategoriController extends Controller{
 		];
 		$validator = Validator::make($request->all(),$rules,$messages);
 		if(!$validator->fails()){
-			$benar = ['status'=>'success'];
-			$salah = ['status'=>'error'];
 			if(!isset($request->id)){
-				$benar['message'] = 'Data Berhasil Disimpan!';
-				$salah['message'] = 'Data Gagal Disimpan!';
 				$kategori = new Kategori;
 				$kategori->kode_kategori = $request->kodeKategori;
 			}else{
-				$benar['message'] = 'Data Berhasil Diperbarui!';
-				$salah['message'] = 'Data Gagal Diperbarui!';
 				$kategori = Kategori::find($request->id);
 			}
 			$kategori->nama_kategori = strtolower($request->namaKategori);
 			$kategori->save();
 			if($kategori){
-				return $benar;
+				if(!isset($request->id)){
+					return ['status'=>'success', 'message'=>'Kategori Berhasil Disimpan!'];
+				}else{
+					return ['status'=>'success', 'message'=>'Kategori Berhasil Diperbarui!'];
+				}
 			}else{
-				return $salah;
+				if(!isset($request->id)){
+					return ['status'=>'error','message'=>'Kategori Gagal Disimpan!'];
+				}else{
+					return ['status'=>'error', 'message'=>'Kategori Gagal Diperbarui!'];
+				}
 			}
 		}else{
 			return $validator->messages();
@@ -83,8 +86,13 @@ class kategoriController extends Controller{
 		$id = $request->id;
 		$data = Kategori::find($id);
 		if(!empty($data)){
-			$data->delete();
-			return ['status'=>'success','message'=>'Data Berhasil Dihapus!'];
+			$stok = StokProduk::where('kategori_id',$id)->first();
+			if(!empty($stok)){
+				return ['status'=>'error','message'=>'Kategori Sedang Digunakan, Tidak Bisa Dihapus!'];
+			}else{
+				$data->delete();
+				return ['status'=>'success','message'=>'Kategori Berhasil Dihapus!'];
+			}
 		}else{
 			return ['status'=>'error', 'message'=>'Data Gagal Dihapus!'];
 		}

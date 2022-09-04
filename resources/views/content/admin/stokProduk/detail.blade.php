@@ -29,33 +29,35 @@
 					<div class="form-group row mb-3">
 						<label for="kodeProduk" class="col-sm-2 col-form-label">Kode Produk</label>
 						<div class="col-sm-12">
-							<input type="text" name="kodeProduk" class="form-control" id="kodeProduk" placeholder="{{!empty($data)?$data->kode_barang:$kode}}" disabled readonly>
+							<input type="text" name="kodeProduk" class="form-control" id="kodeProduk" placeholder="{{!empty($data)?$data->kode_stok:''}}" disabled readonly>
 						</div>
 					</div>
 					<div class="form-group row mb-3">
-						<div class="col-sm-6 mb-2">
-							<div class="row">
-								<div class="col-sm-12">
-									<label for="namaProduk" class="col-form-label">Nama Produk</label>
-									<input type="text" name="namaProduk" class="form-control" id="namaProduk" placeholder="{{!empty($data)?$data->nama_barang:''}}" disabled readonly>
-								</div>
-							</div>
+						<div class="col-sm-6">
+							<label for="namaProduk" class="col-form-label">Nama Produk</label>
+							<select class="form-control" name="namaProduk" id="namaProduk" disabled readonly>
+								<option value="first" selected disabled>--Pilih Produk--</option>
+								@if(!empty($produk))
+								@foreach($produk as $key => $val)
+								<option value="{{$val->id}}" @if(!empty($data)){{$data->produk_id==$val->id?'selected':''}}@endif>
+									{{$val->nama_produk}}
+								</option>
+								@endforeach
+								@endif
+							</select>
 						</div>
-						<div class="col-sm-6 mb-2">
-							<div class="row">
-								<div class="col-sm-12">
-									<label for="kategoriProduk" class="col-form-label">Kategori Produk</label>
-									<select class="form-control" name="kategoriProduk" id="kategoriProduk" disabled readonly>
-										@if(!empty($kategori))
-										@foreach($kategori as $key => $val)
-										<option value="{{$val->id}}" @if(!empty($data)){{$data->kategori_id==$val->id?'selected':''}}@endif>
-											{{$val->nama_kategori}}
-										</option>
-										@endforeach
-										@endif
-									</select>
-								</div>
-							</div>
+						<div class="col-sm-6">
+							<label for="kategoriProduk" class="col-form-label">Kategori Produk</label>
+							<select class="form-control" name="kategoriProduk" id="kategoriProduk" disabled readonly>
+								<option value="first" selected disabled>--Pilih Kategori--</option>
+								@if(!empty($kategori))
+								@foreach($kategori as $key => $val)
+								<option value="{{$val->id}}" @if(!empty($data)){{$data->kategori_id==$val->id?'selected':''}}@endif>
+									{{$val->nama_kategori}}
+								</option>
+								@endforeach
+								@endif
+							</select>
 						</div>
 					</div>
 					<div class="form-group row mb-3">

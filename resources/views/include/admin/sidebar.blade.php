@@ -52,6 +52,12 @@
 						</li>
 					</ul>
 				</li>
+				<li class="nav-item">
+					<a href="{{route('stokProduk')}}" onclick="{{($segment1=='stok-produk')?'return false':''}}" class="nav-link {{($segment1=='stok-produk')?'active':''}}">
+						<i class="nav-icon fas fa-box-open"></i>
+						<p>Stok Produk</p>
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</div>

@@ -20,12 +20,12 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0">Produk</h1>
+					<h1 class="m-0">Stok Produk</h1>
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">Produk</li>
+						<li class="breadcrumb-item"><a href="" onclick="return false">Home</a></li>
+						<li class="breadcrumb-item active">Stok Produk</li>
 					</ol>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 				<div class="card">
 					<div class="card-header text-right">
 						<button class=" btn btn-primary btn-add" type="button">
-							<i class="align-middle feather-19" data-feather="plus"></i> Tambah Produk
+							<i class="align-middle feather-19" data-feather="plus"></i> Tambah Stok
 						</button>
 					</div>
 					<div class="card-body">
@@ -45,8 +45,9 @@
 							<thead class="text-center">
 								<tr>
 									<th width="7%"> No</th>
-									<th> Kode Produk</th>
+									<th> Kode Stok</th>
 									<th> Nama Produk</th>
+									<th> Kategori</th>
 									<th> QTY</th>
 									<th> Harga Produk</th>
 									<th> Action</th>
@@ -74,17 +75,16 @@
 			serverSide: true,
 			processing: true,
 			ajax: {
-				url: "{{route('getProduk')}}",
+				url: "{{route('getStokProduk')}}",
 				type: "POST",
 			},
 			columns: [
 				{data:'DT_RowIndex', name:"DT_RowIndex", render:function(data,type,row){
 					return "<p class='text-center' style='margin:0;'>"+data+"</p>"
 				}},
-				{data:"kode_barang", name:"kode_barang", render:function(data,type,row){
-					return  "<p class='text-center' style='margin:0;'>"+data+"</p>"
-				}},
+				{data:"kode", name:"kode"},
 				{data:"nama", name:"nama"},
+				{data:"kategori", name:"kategori"},
 				{data:"qty", name:"qty", render:function(data,type,row){
 					return  "<p class='text-center' style='margin:0;'>"+data+"</p>"
 				}},
@@ -108,7 +108,7 @@
 
 	$(".btn-add").click(function(){
 		$("#main-layer").hide()
-		$.post("{{route('formProduk')}}").done(function(data){
+		$.post("{{route('formStokProduk')}}").done(function(data){
 			if(data.status=="success"){
 				$("#other-page").html(data.data).fadeIn()
 			}else{
@@ -120,7 +120,7 @@
 
 	function detail(id){
 		$('#main-layer').hide()
-		$.post("{{route('detailProduk')}}",{id:id}).done((data)=>{
+		$.post("{{route('detailStokProduk')}}",{id:id}).done((data)=>{
 			if(data.status=='success'){
 				$('#other-page').html(data.data).fadeIn()
 			}else{
@@ -132,7 +132,7 @@
 
 	function updated(id){
 		$("#main-layer").hide()
-		$.post("{{route('formProduk')}}",{id:id}).done((data)=>{
+		$.post("{{route('formStokProduk')}}",{id:id}).done((data)=>{
 			if(data.status=="success"){
 				$("#other-page").html(data.data).fadeIn()
 			}else{

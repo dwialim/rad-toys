@@ -24,7 +24,7 @@
 				</div><!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item"><a href="" onclick="return false">Home</a></li>
 						<li class="breadcrumb-item active">Produk</li>
 					</ol>
 				</div>
@@ -98,18 +98,6 @@
 		})
 	})
 
-	function detail(id){
-		$('#main-layer').hide()
-		$.post("{{route('detailProduk')}}",{id:id}).done((data)=>{
-			if(data.status=='success'){
-				$('#other-page').html(data.data).fadeIn()
-			}else{
-				$('#other-page').empty()
-				$('#main-layer').show()
-			}
-		})
-	}
-
 	function updated(id){
 		$("#main-layer").hide()
 		$.post("{{route('formProduk')}}",{id:id}).done((data)=>{
@@ -150,8 +138,7 @@
 							icon: data.status,
 							title: 'Gagal',
 							text: data.message,
-							timer: 1300,
-							showConfirmButton: false,
+							showConfirmButton: true,
 						})
 					}
 				})
