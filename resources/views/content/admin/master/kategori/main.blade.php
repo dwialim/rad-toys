@@ -77,6 +77,9 @@
 					return '<p class="text-center" style="margin:0;">'+data+'</p>'
 				}},
 				{data: 'nama_kategori',name: 'nama_kategori',render:function(data){
+					data = data.toLowerCase().replace(/\b[a-z]/g,(let)=>{
+						return let.toUpperCase()
+					})
 					return '<p class="text-center" style="margin:0;">'+data+'</p>'
 				}},
 				{data: 'action', name: 'action'}

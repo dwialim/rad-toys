@@ -35,7 +35,7 @@
 					<div class="form-group row mb-3">
 						<label for="namaProduk" class="col-sm-2 col-form-label">Nama Produk<span class="text-red">*</span></label>
 						<div class="col-sm-12">
-							<input type="text" name="namaProduk" class="form-control" id="namaProduk" placeholder="nama Produk" value="{{!empty($data)?$data->nama_barang:''}}">
+							<input type="text" name="namaProduk" class="form-control" id="namaProduk" placeholder="nama Produk" value="{{!empty($data)?$data->nama_produk:''}}">
 						</div>
 					</div>
 				</form>
@@ -49,6 +49,18 @@
 </div>
 
 <script>
+	@if(empty($data))
+	$(()=>{
+		$('#namaProduk').focus();
+	})
+	@endif
+
+	$('#namaProduk').keyup((e)=>{
+		if(e.keyCode===13){
+			$('.btn-simpan').click()
+		}
+	})
+
 	$(".btn-cancel").click(function(e){
 		e.preventDefault()
 		$("#other-page").fadeOut(function(){
@@ -122,6 +134,6 @@
 				}
 			}
 		})
-		$(".btn-simpan").html("Simpan").attr("disabled",false)
+		$(".btn-simpan").attr("disabled",false)
 	})
 </script>

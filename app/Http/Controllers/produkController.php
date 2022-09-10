@@ -29,7 +29,7 @@ class produkController extends Controller{
 	}
 
 	public function save(Request $request){
-		// return $request->all();
+		$id = $request->id;
 		$rules = [
 			'namaProduk' => 'required',
 		];
@@ -38,14 +38,26 @@ class produkController extends Controller{
 		];
 		$validator = Validator::make($request->all(),$rules,$messages);
 		if(!$validator->fails()){
-			$produk = new Produk;
-			$produk->kode_produk = $request->kodeProduk;
-			$produk->nama_produk = $request->namaProduk;
+			if(!isset($id)){
+				$produk = new Produk;
+				$produk->kode_produk = $request->kodeProduk;
+			}else{
+				$produk = Produk::where('id',$id)->first();
+			}
+			$produk->nama_produk = strtolower($request->namaProduk);
 			$produk->save();
 			if($produk){
-				return ['status'=>'success','message'=>'Produk Berhasil Disimpan!'];
+				if(!isset($id)){
+					return ['status'=>'success','message'=>'Produk Berhasil Disimpan!'];
+				}else{
+					return ['status'=>'success','message'=>'Produk Berhasil Diperbarui!'];
+				}
 			}else{
-				return ['status'=>'error','message'=>'Produk Gagal Disimpan!'];
+				if(!isset($id)){
+					return ['status'=>'error','message'=>'Produk Gagal Disimpan!'];
+				}else{
+					return ['status'=>'error','message'=>'Produk Gagal Diperbarui!'];
+				}
 			}
 		}else{
 			return $validator->messages();
@@ -61,7 +73,6 @@ class produkController extends Controller{
 				$btn = "
 					<div class='row'>
 						<div class='col-sm-12 text-center'>
-						<a href='javascript:' title='Detail' onclick=detail(".$row->id.")><i class='far fa-eye f-16 mr-15 text-info'></i></a> &nbsp;
 						<a href='javascript:' title='Edit' onclick=updated(".$row->id.")><i class='far fa-edit f-16 mr-15 text-warning'></i></a> &nbsp;
 						<a href='javascript:' title='Hapus' onclick=deleted(".$row->id.")><i class='far fa-trash-alt f-16 text-danger'></i></a>
 						</div>
@@ -76,9 +87,7 @@ class produkController extends Controller{
 			->addColumn('nama',function($row){
 				$txt = "
 					<div class='row'>
-						<div class='col-sm-3'>
-						</div>
-						<div class='col-sm-9'>".ucwords($row->nama_produk)."</div>
+						<div class='col-sm-12 text-center'>".ucwords($row->nama_produk)."</div>
 					</div>";
 					return $txt;
 				})

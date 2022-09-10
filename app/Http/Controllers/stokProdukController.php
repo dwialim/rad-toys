@@ -37,6 +37,7 @@ class stokProdukController extends Controller{
 			'image'          => 'image|file|mimes:jpeg,jpg,png|max:2048',
 			'kategoriProduk' => 'required',
 			'namaProduk'     => 'required',
+			'publish'        => 'required',
 		];
 		$messages = [
 			'required' => 'Kolom Harus Diisi!',
@@ -52,6 +53,14 @@ class stokProdukController extends Controller{
 			}else{
 				$stok = StokProduk::find($request->id);
 			}
+			if($stok->qty==$stok->qty_awal){
+				$stok->qty_awal = $request->qtyProduk;
+			}
+			$stok->kategori_id = $request->kategoriProduk;
+			$stok->produk_id   = $request->namaProduk;
+			$stok->qty         = $request->qtyProduk;
+			$stok->harga       = preg_replace("/\D+/", "", $request->hargaProduk);
+			$stok->publish     = $request->publish;	
 			if(!empty($image)){
 				if(!empty($stok->foto)&&file_exists(public_path().'/storage/'.$stok->foto)){
 					$unlinkPath = public_path().'/storage/'.$stok->foto;
@@ -60,13 +69,6 @@ class stokProdukController extends Controller{
 				$path       = $image->store('produk-image');
 				$stok->foto = $path;
 			}
-			if($stok->qty==$stok->qty_awal){
-				$stok->qty_awal = $request->qtyProduk;
-			}
-			$stok->kategori_id = $request->kategoriProduk;
-			$stok->produk_id   = $request->namaProduk;
-			$stok->qty         = $request->qtyProduk;
-			$stok->harga       = preg_replace("/\D+/", "", $request->hargaProduk);
 			$stok->save();
 			if($stok){
 				if(!isset($request->id)){
@@ -121,6 +123,21 @@ class stokProdukController extends Controller{
 				})
 				->rawColumns(['nama','kode','action','kategori'])
 				->make(true);
+		}
+	}
+
+	public function destroy(Request $request){
+		$id = $request->id;
+		$data = StokProduk::find($id);
+		if($data){
+			if(!empty($data->foto) && file_exists(public_path().'/storage/'.$data->foto)){
+				$unlinkPath = public_path().'/storage/'.$data->foto;
+				unlink($unlinkPath);
+			}
+			$data->delete();
+			return ['status'=>'success','message'=>'Stok Berhasil Dihapus!'];
+		}else{
+			return ['status'=>'error','message'=>'Data Gagal Dihapus!'];
 		}
 	}
 

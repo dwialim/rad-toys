@@ -11,7 +11,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<a href="javascript:void(0)" class="brand-link">
 		<img src="{{asset('assets/admin/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-		<span class="brand-text font-weight-light">AdminLTE 3</span>
+		<span class="brand-text font-weight-light">Rad Toys</span>
 	</a>
 
 	<div class="sidebar">
@@ -40,13 +40,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="" class="nav-link {{($segment2=='profile')?'active':''}}"  onclick="{{($segment2=='profile')?'return false':''}}" >
+							<a href="{{route('profile')}}" class="nav-link {{($segment2=='profile')?'active':''}}"  onclick="{{($segment2=='profile')?'return false':''}}" >
 								<div class="sub-menu"><i class="far fa-address-book nav-icon"></i><p>Profile</p></div>
 							</a>
 						</li>
 
 						<li class="nav-item">
-							<a href="" class="nav-link {{($segment2=='user')?'active':''}}" onclick="{{($segment2=='user')?'return false':''}}">
+							<a href="{{route('user')}}" class="nav-link {{($segment2=='user')?'active':''}}" onclick="{{($segment2=='user')?'return false':''}}">
 								<div class="sub-menu"><i class="far fa-user nav-icon"></i><p>User</p></div>
 							</a>
 						</li>

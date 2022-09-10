@@ -32,9 +32,17 @@
 				<form class="formSave">
 					<input type="hidden" name="id" id="idProduk" class="form-control" value="{{(!empty($data))?$data->id:''}}">
 					<div class="form-group row mb-3">
-						<label for="kodeStok" class="col-sm-2 col-form-label">Kode Stok</label>
-						<div class="col-sm-12">
+						<div class="col-sm-6">
+							<label for="kodeStok" class="col-form-label">Kode Stok</label>
 							<input type="text" name="kodeStok" class="form-control" id="kodeStok" placeholder="{{!empty($data)?$data->kode_stok:$kode}}" disabled readonly>
+						</div>
+						<div class="col-sm-6">
+							<label for="publish" class="col-form-label">Publish<span class="text-red">*</span></label>
+							<select class="form-control" name="publish" id="publish">
+								<option value="first" selected disabled>--Pilih Status--</option>
+								<option value="0" @if(!empty($data)) {{ ($data->publish==0)?'selected':'' }} @endif>Unpublish</option>
+								<option value="1" @if(!empty($data)) {{ ($data->publish==1)?'selected':'' }} @endif>Publish</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group row mb-3">
@@ -152,7 +160,7 @@
 
 	$(".btn-simpan").click(function(e){
 		e.preventDefault()
-		// $(".btn-simpan").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...').attr("disabled",true)
+		$(".btn-simpan").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...').attr("disabled",true)
 		// $("#kodeProduk").prop("disabled",false)
 		var kode = $("#kodeStok").attr("placeholder")
 		var data = new FormData($(".formSave")[0])

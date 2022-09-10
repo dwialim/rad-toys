@@ -42,6 +42,18 @@
 
 <script src="{{asset('assets/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <script>
+	@if(empty($data))
+	$(()=>{
+		$('#namaKategori').focus()
+	})
+	@endif
+
+	$('#namaKategori').keyup((e)=>{
+		if(e.keyCode === 13){
+			$('.btn-simpan').click()
+		}
+	})
+
 	$(".btn-cancel").click(function(e){
 		e.preventDefault()
 		$("#other-page").fadeOut(function(){

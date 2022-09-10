@@ -27,9 +27,17 @@
 				<form class="formSave">
 					<input type="hidden" name="id" id="idProduk" class="form-control" value="{{(!empty($data))?$data->id:''}}">
 					<div class="form-group row mb-3">
-						<label for="kodeProduk" class="col-sm-2 col-form-label">Kode Produk</label>
-						<div class="col-sm-12">
+						<div class="col-sm-6">
+							<label for="kodeProduk" class="col-form-label">Kode Produk</label>
 							<input type="text" name="kodeProduk" class="form-control" id="kodeProduk" placeholder="{{!empty($data)?$data->kode_stok:''}}" disabled readonly>
+						</div>
+						<div class="col-sm-6">
+							<label for="publish" class="col-form-label">Publish</label>
+							<select class="form-control" name="publish" id="publish" readonly disabled>
+								<option value="first" selected disabled>--Pilih Status--</option>
+								<option value="0" @if(!empty($data)) {{ ($data->publish==0)?'selected':'' }} @endif>Unpublish</option>
+								<option value="1" @if(!empty($data)) {{ ($data->publish==1)?'selected':'' }} @endif>Publish</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group row mb-3">

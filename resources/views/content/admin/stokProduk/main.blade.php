@@ -153,6 +153,28 @@
 			cancelButtonColor: '#rgb(155 155 155)',
 			confirmButtonText: "Ya, Hapus!",
 			cancelButtonText: "Batal."
+		}).then((res)=>{
+			if(res.isConfirmed){
+				$.post("{{route('destroyStokProduk')}}",{id:id}).done((data)=>{
+					if(data.status=='success'){
+						Swal.fire({
+							icon: data.status,
+							title: 'Berhail',
+							text: data.message,
+							timer: 1300,
+							showConfirmButton: false,
+						})
+						$('#dataTable').DataTable().ajax.reload()
+					}else{
+						Swal.fire({
+							icon: data.status,
+							title: 'Gagal',
+							text: data.message,
+							showConfirmButton: true,
+						})
+					}
+				})
+			}
 		})
 	}
 

@@ -6,12 +6,22 @@ use App\Http\Controllers\landingController;
 use App\Http\Controllers\produkController;
 use App\Http\Controllers\stokProdukController;
 use App\Http\Controllers\kategoriController;
+use App\Http\Controllers\profileController;
 
 Route::get('/',function(){
 	return redirect('/dashboard');
 });
 Route::get('/dashboard',[adminController::class, 'main'])->name('dashboard');
+
 Route::group(['prefix'=>'master'],function(){
+	Route::group(['prefix'=>'kategori'],function(){
+		Route::get('/',[kategoriController::class, 'main'])->name('kategori');
+		Route::post('/form',[kategoriController::class, 'form'])->name('formKategori');
+		Route::post('/save',[kategoriController::class, 'save'])->name('saveKategori');
+		Route::post('/destroy',[kategoriController::class, 'destroy'])->name('destroyKategori');
+		Route::post('/getKategori',[kategoriController::class, 'getKategori'])->name('getKategori');
+	});
+
 	Route::group(['prefix'=>'produk'],function(){
 		Route::get('/',[produkController::class, 'main'])->name('produk');
 		Route::post('/form',[produkController::class, 'form'])->name('formProduk');
@@ -20,18 +30,28 @@ Route::group(['prefix'=>'master'],function(){
 		Route::post('/getProduk',[produkController::class, 'getProduk'])->name('getProduk');
 	});
 
-	Route::group(['prefix'=>'kategori'],function(){
-		Route::get('/',[kategoriController::class, 'main'])->name('kategori');
-		Route::post('/form',[kategoriController::class, 'form'])->name('formKategori');
-		Route::post('/save',[kategoriController::class, 'save'])->name('saveKategori');
-		Route::post('/destroy',[kategoriController::class, 'destroy'])->name('destroyKategori');
-		Route::post('/getKategori',[kategoriController::class, 'getKategori'])->name('getKategori');
+	Route::group(['prefix'=>'profile'],function(){
+		Route::get('/',[profileController::class, 'main'])->name('profile');
+		Route::post('/form',[profileController::class, 'form'])->name('formProfile');
+		Route::post('/save',[profileController::class, 'save'])->name('saveProfile');
+		Route::post('/destroy',[profileController::class, 'destroy'])->name('destroyProfile');
+		Route::post('/getProfile',[profileController::class, 'getProfile'])->name('getProfile');
+	});
+
+	Route::group(['prefix'=>'user'],function(){
+		Route::get('/',[profileController::class, 'main'])->name('user');
+		Route::post('/form',[profileController::class, 'form'])->name('formUser');
+		Route::post('/save',[profileController::class, 'save'])->name('saveUser');
+		Route::post('/destroy',[profileController::class, 'destroy'])->name('destroyUser');
+		Route::post('/getProfile',[profileController::class, 'getProduk'])->name('getUser');
 	});
 });
+
 Route::group(['prefix'=>'stok-produk'],function(){
 	Route::get('/',[stokProdukController::class, 'main'])->name('stokProduk');
 	Route::post('/form',[stokProdukController::class, 'form'])->name('formStokProduk');
 	Route::post('/save',[stokProdukController::class, 'save'])->name('saveStokProduk');
+	Route::post('/destroy',[stokProdukController::class, 'destroy'])->name('destroyStokProduk');
 	Route::post('/detail',[stokProdukController::class, 'detail'])->name('detailStokProduk');
 	Route::post('/getStok',[stokProdukController::class, 'getStok'])->name('getStokProduk');
 });

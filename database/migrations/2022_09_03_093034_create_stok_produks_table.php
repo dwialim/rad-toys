@@ -21,6 +21,7 @@ class CreateStokProduksTable extends Migration
             $table->string('foto')->nullable();
             $table->integer('qty')->nullable();
             $table->integer('harga');
+            $table->boolean('publish');
             $table->timestamps();
         });
     }
