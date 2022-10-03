@@ -19,6 +19,7 @@ class CreateStokProduksTable extends Migration
             $table->foreignId('produk_id');
             $table->string('kode_stok');
             $table->string('foto')->nullable();
+            $table->integer('qty_awal')->nullable();
             $table->integer('qty')->nullable();
             $table->integer('harga');
             $table->boolean('publish');
