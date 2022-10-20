@@ -8,9 +8,6 @@ use App\Http\Controllers\admin\stokProdukController;
 use App\Http\Controllers\admin\kategoriController;
 use App\Http\Controllers\admin\profileController;
 
-// Route::get('/',function(){
-// 	return redirect('/dashboard');
-// });
 Route::get('/landing',function(){
 	return redirect('/rad-toys');
 });
