@@ -15,6 +15,10 @@
 	</a>
 
 	<div class="sidebar">
+		@if(session()->get('loginid'))
+			{{-- <p class="text-light">{{ App\models\User::where('id', '=', Session()->get('loginid'))->get('name') }}</p> --}}
+			<p class="text-light">{{ App\models\User::find(Session()->get('loginid'))->name }}</p>
+		@endif
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-item">
@@ -56,6 +60,12 @@
 					<a href="{{route('stokProduk')}}" onclick="{{($segment1=='stok-produk')?'return false':''}}" class="nav-link {{($segment1=='stok-produk')?'active':''}}">
 						<i class="nav-icon fas fa-box-open"></i>
 						<p>Stok Produk</p>
+					</a>
+				</li>
+				<li class="nav-item">						
+					<a class="nav-link" href="{{ route('logout') }}">
+						<i class="nav-icon fas fa-sign-out-alt"></i>
+						<p>Logout</p>
 					</a>
 				</li>
 			</ul>
