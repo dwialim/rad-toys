@@ -1,0 +1,13 @@
+<script src="assets/landing/js/jquery-1.12.4.min.js"></script>
+<script src="assets/landing/js/bootstrap.min.js"></script>
+<script src="assets/landing/js/chosen.min.js"></script>
+<script src="assets/landing/js/countdown.min.js"></script>
+<script src="assets/landing/js/jquery.scrollbar.min.js"></script>
+<script src="assets/landing/js/lightbox.min.js"></script>
+<script src="assets/landing/js/magnific-popup.min.js"></script>
+<script src="assets/landing/js/slick.min.js"></script>
+<script src="assets/landing/js/jquery.zoom.min.js"></script>
+<script src="assets/landing/js/threesixty.min.js"></script>
+<script src="assets/landing/js/jquery-ui.min.js"></script>
+<script src="assets/landing/js/mobilemenu.js"></script>
+<script src="assets/landing/js/functions.js"></script>
