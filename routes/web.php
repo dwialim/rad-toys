@@ -9,6 +9,12 @@ use App\Http\Controllers\admin\kategoriController;
 use App\Http\Controllers\admin\profileController;
 use App\Http\Controllers\admin\userController;
 
+Route::get('/landing',function(){
+	return redirect('/rad-toys');
+});
+Route::group(['prefix'=>'rad-toys'],function(){
+	Route::get('/',[landingController::class, 'main']);
+});
 
 Route::get('/',[LandingController::class, 'main'])->name('home');
 Route::get('/login',[LandingController::class, 'login'])->name('login')->middleware('rd_login');
@@ -23,7 +29,25 @@ Route::middleware('nd_login')->group(function(){
 		return redirect('/admin/dashboard');
 	});
 	Route::group(['prefix'=>'admin'],function(){
-		Route::get('/dashboard',[adminController::class, 'main'])->name('dashboard');
+
+	Route::get('/dashboard',[adminController::class, 'main'])->name('dashboard');
+
+		Route::group(['prefix'=>'master'],function(){
+			Route::group(['prefix'=>'kategori'],function(){
+				Route::get('/',[kategoriController::class, 'main'])->name('kategori');
+				Route::post('/form',[kategoriController::class, 'form'])->name('formKategori');
+				Route::post('/save',[kategoriController::class, 'save'])->name('saveKategori');
+				Route::post('/destroy',[kategoriController::class, 'destroy'])->name('destroyKategori');
+				Route::post('/getKategori',[kategoriController::class, 'getKategori'])->name('getKategori');
+			});
+
+			Route::group(['prefix'=>'produk'],function(){
+				Route::get('/',[produkController::class, 'main'])->name('produk');
+				Route::post('/form',[produkController::class, 'form'])->name('formProduk');
+				Route::post('/save',[produkController::class, 'save'])->name('saveProduk');
+				Route::post('/destroy',[produkController::class, 'destroy'])->name('destroyProduk');
+				Route::post('/getProduk',[produkController::class, 'getProduk'])->name('getProduk');
+			});
 
 		Route::group(['prefix'=>'master'],function(){
 			Route::group(['prefix'=>'kategori'],function(){
