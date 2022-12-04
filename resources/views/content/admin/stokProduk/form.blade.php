@@ -40,8 +40,8 @@
 							<label for="publish" class="col-form-label">Publish<span class="text-red">*</span></label>
 							<select class="form-control" name="publish" id="publish">
 								<option value="first" selected disabled>--Pilih Status--</option>
-								<option value="0" @if(!empty($data)) {{ ($data->publish==0)?'selected':'' }} @endif>Unpublish</option>
-								<option value="1" @if(!empty($data)) {{ ($data->publish==1)?'selected':'' }} @endif>Publish</option>
+								<option value="0" @if(!empty($data)) {{ ($data->publish==0)?'selected':'' }} @endif>Private</option>
+								<option value="1" @if(!empty($data)) {{ ($data->publish==1)?'selected':'' }} @endif>Public</option>
 							</select>
 						</div>
 					</div>
@@ -210,8 +210,10 @@
 							}
 						}else if(name=="qtyProduk"){
 							name = "QTY Produk"
-						}else{
+						}else if(name=="hargaProduk"){
 							name = "Harga Produk"
+						}else{
+							name = "Status Publish"
 						}
 						if(name!="Gambar"){
 							txt = " Tidak Boleh Kosong!"

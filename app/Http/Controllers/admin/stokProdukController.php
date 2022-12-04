@@ -122,7 +122,15 @@ class stokProdukController extends Controller{
 					$txt = "<p class='text-center' style='margin:0;'>".$row->kategori->nama_kategori."</p>";
 					return $txt;
 				})
-				->rawColumns(['nama','kode','action','kategori'])
+				->addColumn('publish', function($row){
+					$publish = 'Public';
+					if($row->publish==false){
+						$publish = 'Private';
+					}
+					$txt = "<p class='text-center' style='margin:0;'>$publish</p>";
+					return $txt;
+				})
+				->rawColumns(['nama','kode','action','kategori','publish'])
 				->make(true);
 		}
 	}

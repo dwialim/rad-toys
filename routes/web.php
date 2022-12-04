@@ -9,14 +9,14 @@ use App\Http\Controllers\admin\kategoriController;
 use App\Http\Controllers\admin\profileController;
 use App\Http\Controllers\admin\userController;
 
-Route::get('/landing',function(){
+Route::get('/',function(){
 	return redirect('/rad-toys');
 });
 Route::group(['prefix'=>'rad-toys'],function(){
-	Route::get('/',[landingController::class, 'main']);
+	Route::get('/',[LandingController::class, 'main'])->name('home');
+	// Route::get('/',[landingController::class, 'main']);
 });
 
-Route::get('/',[LandingController::class, 'main'])->name('home');
 Route::get('/login',[LandingController::class, 'login'])->name('login')->middleware('rd_login');
 Route::get('/register',[LandingController::class, 'register'])->name('register')->middleware('rd_login');
 Route::get('/dologin',[LandingController::class, 'dologin'])->name('dologin');

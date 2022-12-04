@@ -12,10 +12,6 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/zoom/css/jquery.pan.css')}}">
 
 <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/datatables.min.css')}}">
-{{-- <link rel="stylesheet" href="{{asset('assets/admin/plugins/select2/css/select2.min.css')}}"> --}}
-{{-- <link rel="stylesheet" href="{{asset('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}"> --}}
-
-{{-- <link rel="stylesheet" href="{{asset('assets/user/bootstrap.min.css')}}"> --}}
 @endpush
 @section('content')
 
@@ -80,7 +76,6 @@
 							<thead class="text-center" style="width:100%;">
 								<tr>
 									<th width="7%"> No</th>
-									<th> ID</th>
 									<th> Nama</th>
 									<th> Email</th>
 									<th> Action</th>
@@ -159,10 +154,7 @@
 <script src="{{asset('assets/user/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/user/popper.min.js')}}"></script>
 <script src="{{asset('assets/user/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('assets/admin/zoom/js/jquery.pan.js')}}"></script>
 <script src="{{asset('assets/admin/js/datatables.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/select2/js/select2.full.min.js')}}"></script>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -178,7 +170,6 @@
 				{data:'DT_RowIndex', name:"DT_RowIndex", render:function(data,type,row){
 					return "<p class='text-center' style='margin:0;'>"+data+"</p>"
 				}},
-				{data:"id", name:"id"},
 				{data:"name", name:"name"},
 				{data:"email", name:"email"},
 				{data:"action", name:"action"}
@@ -224,6 +215,7 @@
 
 	$(document).ready(function() {
 		$(document).on('click', '#add_usr', function() {
+			$('#exampleModalLabel').html('Tambah User')
 			$('#frm').attr('action', '{{ route('sv_user') }}')
 			$('#val_username').val('').prop('disabled', false);
 			$('#val_email').val('').prop('disabled', false);
@@ -233,12 +225,12 @@
 		});
 	});
 
-	$(document).ready(function() {
 		$(document).on('click', '#edt_usr', function() {
 			var id = $(this).data('id_usr');
 			var username = $(this).data('username');
 			var email = $(this).data('email');
 			var password = $(this).data('password');
+			$('#exampleModalLabel').html('Edit User')
 			$('#frm').attr('action', '{{ route('edt_user') }}');
 			$('#val_id_usr').val(id);
 			$('#val_username').val(username).prop('disabled', false);
@@ -247,18 +239,16 @@
 			$('#val_password').val('').prop('disabled', false).attr('required', false);
 			$('#btn_sv').css('visibility', 'visible');
 		})
-	});
 
-	$(document).ready(function() {
 		$(document).on('click', '#shw_usr', function() {
 			var id = $(this).data('id_usr');
 			var username = $(this).data('username');
 			var email = $(this).data('email');
+			$('#exampleModalLabel').html('Detail User')
 			$('#val_username').val(username).prop('disabled', true);
 			$('#val_email').val(email).prop('disabled', true);
 			$('#box_password').css('visibility', 'hidden');
 			$('#btn_sv').css('visibility', 'hidden');
 		});
-	});
 </script>
 @endpush

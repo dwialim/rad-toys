@@ -87,9 +87,7 @@ class userController extends Controller
         $data = User::find($req->id_usr);
         $data->name = $req->username;
         $data->email = $req->email;
-        if($req->password === ''){
-            $data->password = $data->password;  
-        } else {    
+        if(isset($req->password)){
             $data->password =  Hash::make($req->password);
         }
         $data->save();
