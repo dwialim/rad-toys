@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\stokProdukController;
 use App\Http\Controllers\admin\kategoriController;
 use App\Http\Controllers\admin\profileController;
 use App\Http\Controllers\admin\userController;
+use App\Http\Controllers\admin\reviewCustomerController;
 
 Route::get('/',function(){
 	return redirect('/rad-toys');
@@ -73,6 +74,11 @@ Route::middleware('nd_login')->group(function(){
 			Route::post('/destroy',[stokProdukController::class, 'destroy'])->name('destroyStokProduk');
 			Route::post('/detail',[stokProdukController::class, 'detail'])->name('detailStokProduk');
 			Route::post('/getStok',[stokProdukController::class, 'getStok'])->name('getStokProduk');
+		});
+
+		Route::group(['prefix'=>'review-customer'],function(){
+			Route::get('/',[reviewCustomerController::class, 'main'])->name('mainCustomer');
+			Route::post('/form',[reviewCustomerController::class, 'form'])->name('formReviewCust');
 		});
 	});
 

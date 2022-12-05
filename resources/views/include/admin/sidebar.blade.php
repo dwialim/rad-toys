@@ -4,7 +4,7 @@
 	}
 </style>
 @php
-	$segment = request()->segment(1);
+	$segment  = request()->segment(1);
 	$segment1 = request()->segment(2);
 	$segment2 = request()->segment(3);
 @endphp
@@ -24,6 +24,7 @@
 						<p>Dashboard</p>
 					</a>
 				</li>
+
 				<li class="nav-item {{($segment1=='master')?'menu-open':''}}">
 					<a href="#" class="nav-link {{($segment1=='master')?'active':''}}">
 						<i class="nav-icon fas fa-database"></i>
@@ -53,10 +54,18 @@
 						</li>
 					</ul>
 				</li>
+
 				<li class="nav-item">
 					<a href="{{route('stokProduk')}}" onclick="{{($segment1=='stok-produk')?'return false':''}}" class="nav-link {{($segment1=='stok-produk')?'active':''}}">
 						<i class="nav-icon fas fa-box-open"></i>
 						<p>Stok Produk</p>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a href="{{route('mainCustomer')}}" onclick="{{($segment1=='review-customer')?'return false':''}}" class="nav-link {{($segment1=='review-customer')?'active':''}}">
+						<i class="nav-icon fas fa-users"></i>
+						<p>Review Customer</p>
 					</a>
 				</li>
 			</ul>
