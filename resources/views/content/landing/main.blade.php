@@ -1,5 +1,12 @@
 @extends('layout.landing.main')
 @section('content')
+<?php
+	function rupiah($angka){
+        $hasil_rupiah = 'Rp. ' . number_format((int) $angka);
+        $hasil_rupiah = str_replace(',', '.', $hasil_rupiah);
+        return $hasil_rupiah;
+    }
+?>
 <header id="header" class="header style-03 header-dark header-sticky header-transparent">
 	<div class="header-wrap-stick">
 		<div class="header-position">
@@ -8,7 +15,7 @@
 				<div class="header-middle-inner">
 					<div class="header-menu">
 						<div class="box-header-nav menu-nocenter">
-							<ul id="menu-primary-menu" class="clone-main-menu kodory-clone-mobile-menu kodory-nav main-menu">
+							{{-- <ul id="menu-primary-menu" class="clone-main-menu kodory-clone-mobile-menu kodory-nav main-menu">
 								<li id="menu-item-230" class="menu-item menu-item-type-post_type menu-item-object-megamenu menu-item-230 parent parent-megamenu item-megamenu menu-item-has-children">
 									<a class="kodory-menu-item-title" title="Home" href="index-2.html">Home</a>
 									<span class="toggle-submenu"></span>
@@ -19,7 +26,7 @@
 													<div class="dreaming_single_image dreaming_content_element az_align_left shadow-img">
 														<figure class="dreaming_wrapper az_figure">
 															<a href="index-2.html" target="_self" class="az_single_image-wrapper az_box_border_grey effect normal-effect dark-bg">
-																<img src="{{ asset('assets/landing/images/demo001.jpg') }}" class="az_single_image-img attachment-full"
+																<img src="assets/landing/images/demo001.jpg" class="az_single_image-img attachment-full"
 																alt="img">
 															</a>
 														</figure>
@@ -32,7 +39,7 @@
 													<div class="dreaming_single_image dreaming_content_element az_align_left shadow-img">
 														<figure class="dreaming_wrapper az_figure">
 															<a href="home-02.html" target="_self" class="az_single_image-wrapper az_box_border_grey effect normal-effect dark-bg ">
-																<img src="{{ asset('assets/landing/images/demo002.jpg') }}" class="az_single_image-img attachment-full"
+																<img src="assets/landing/images/demo002.jpg" class="az_single_image-img attachment-full"
 																alt="img">
 															</a>
 														</figure>
@@ -45,7 +52,7 @@
 													<div class="dreaming_single_image dreaming_content_element az_align_left shadow-img">
 														<figure class="dreaming_wrapper az_figure">
 															<a href="home-03.html" target="_self" class="az_single_image-wrapper az_box_border_grey effect normal-effect dark-bg">
-																<img src="{{ asset('assets/landing/images/demo003.jpg') }}" class="az_single_image-img attachment-full"
+																<img src="assets/landing/images/demo003.jpg" class="az_single_image-img attachment-full"
 																alt="img">
 															</a>
 														</figure>
@@ -58,7 +65,7 @@
 													<div class="dreaming_single_image dreaming_content_element az_align_left shadow-img">
 														<figure class="dreaming_wrapper az_figure">
 															<a href="home-04.html" target="_self" class="az_single_image-wrapper az_box_border_grey effect normal-effect dark-bg ">
-																<img src="{{ asset('assets/landing/images/demo004.jpg') }}" class="az_single_image-img attachment-full"
+																<img src="assets/landing/images/demo004.jpg" class="az_single_image-img attachment-full"
 																alt="img">
 															</a>
 														</figure>
@@ -71,7 +78,7 @@
 													<div class="dreaming_single_image dreaming_content_element az_align_left shadow-img">
 														<figure class="dreaming_wrapper az_figure">
 															<a href="home-05.html" target="_self" class="az_single_image-wrapper az_box_border_grey effect normal-effect dark-bg">
-																<img src="{{ asset('assets/landing/images/demo005.jpg') }}" class="az_single_image-img attachment-full"
+																<img src="assets/landing/images/demo005.jpg" class="az_single_image-img attachment-full"
 																alt="img">
 															</a>
 														</figure>
@@ -84,7 +91,7 @@
 													<div class="dreaming_single_image dreaming_content_element az_align_left shadow-img">
 														<figure class="dreaming_wrapper az_figure">
 															<a href="home-06.html" target="_self" class="az_single_image-wrapper az_box_border_grey effect normal-effect dark-bg ">
-																<img src="{{ asset('assets/landing/images/demo006.jpg') }}" class="az_single_image-img attachment-full"
+																<img src="assets/landing/images/demo006.jpg" class="az_single_image-img attachment-full"
 																alt="img">
 															</a>
 														</figure>
@@ -113,7 +120,7 @@
 															<li>
 																<a href="shop-list.html" target="_self">
 																	<span class="image">
-																		<img src="{{ asset('assets/landing/images/label-new.png') }}" class="attachment-full size-full" alt="img">
+																		<img src="assets/landing/images/label-new.png" class="attachment-full size-full" alt="img">
 																	</span> Shop List
 																</a>
 															</li>
@@ -141,7 +148,7 @@
 															<li>
 																<a href="single-product-policy.html" target="_self">
 																	<span class="image">
-																		<img src="{{ asset('assets/landing/images/label-new.png') }}" class="attachment-full size-full" alt="img">
+																		<img src="assets/landing/images/label-new.png" class="attachment-full size-full" alt="img">
 																	</span> Extra Sidebar
 																</a>
 															</li>
@@ -163,7 +170,7 @@
 															<li>
 																<a href="single-product-bundle.html" target="_self">
 																	<span class="image">
-																		<img src="{{ asset('assets/landing/images/label-new.png') }}" class="attachment-full size-full" alt="img">
+																		<img src="assets/landing/images/label-new.png" class="attachment-full size-full" alt="img">
 																	</span>
 																	Product Bundle
 																</a>
@@ -171,7 +178,7 @@
 															<li>
 																<a href="single-product-360deg.html" target="_self">
 																	<span class="image">
-																		<img src="{{ asset('assets/landing/images/label-hot.png') }}" class="attachment-full size-full" alt="img">
+																		<img src="assets/landing/images/label-hot.png" class="attachment-full size-full" alt="img">
 																	</span>
 																Product 360 Deg </a>
 															</li>
@@ -220,7 +227,7 @@
 															<li>
 																<a href="single-product.html" target="_self">
 																	<span class="image">
-																		<img src="{{ asset('assets/landing/images/label-hot.png') }}" class="attachment-full size-full" alt="img">
+																		<img src="assets/landing/images/label-hot.png" class="attachment-full size-full" alt="img">
 																	</span>
 																Variable </a>
 															</li>
@@ -395,14 +402,14 @@
 															<li>
 																<a href="single-post-instagram.html" target="_self">
 																	<span class="image">
-																		<img src="{{ asset('assets/landing/images/label-hot.png') }}" class="attachment-full size-full" alt="img">
+																		<img src="assets/landing/images/label-hot.png" class="attachment-full size-full" alt="img">
 																	</span> Instagram In Post
 																</a>
 															</li>
 															<li>
 																<a href="single-post-product.html" target="_self">
 																	<span class="image">
-																		<img src="{{ asset('assets/landing/images/label-new.png') }}" class="attachment-full size-full" alt="img">
+																		<img src="assets/landing/images/label-new.png" class="attachment-full size-full" alt="img">
 																	</span> Product In Post
 																</a>
 															</li>
@@ -422,7 +429,7 @@
 															<li>
 																<a href="single-post-video.html" target="_self">
 																	<span class="image">
-																		<img src="{{ asset('assets/landing/images/label-hot.png') }}" class="attachment-full size-full" alt="img">
+																		<img src="assets/landing/images/label-hot.png" class="attachment-full size-full" alt="img">
 																	</span>
 																	Video
 																</a>
@@ -449,7 +456,7 @@
 										</li>
 									</ul>
 								</li>
-							</ul>
+							</ul> --}}
 						</div>
 						<div class="block-menu-bar">
 							<a class="menu-bar menu-toggle" href="#">
@@ -460,21 +467,21 @@
 						</div>
 					</div>
 					<div class="header-logo">
-						<a href="index-2.html"><img alt="Kodory" src="{{ asset('assets/landing/images/logo.png') }}" class="logo"></a>
+						<a href="index-2.html"><img alt="Kodory" src="assets/landing/images/logo.png" class="logo"></a>
 					</div>
 					<div class="header-control">
 						<div class="header-control-inner">
 							<div class="meta-dreaming">
-								<ul class="wpml-menu">
+								{{-- <ul class="wpml-menu">
 									<li class="menu-item kodory-dropdown block-language">
 										<a href="#" data-kodory="kodory-dropdown">
-											<img src="{{ asset('assets/landing/images/en.png') }}" alt="en" width="18" height="12"> English
+											<img src="assets/landing/images/en.png" alt="en" width="18" height="12"> English
 										</a>
 										<span class="toggle-submenu"></span>
 										<ul class="sub-menu">
 											<li class="menu-item">
 												<a href="#">
-													<img src="{{ asset('assets/lading/images/it.png') }}" alt="it" width="18" height="12"> Italiano
+													<img src="assets/landing/images/it.png" alt="it" width="18" height="12"> Italiano
 												</a>
 											</li>
 										</ul>
@@ -568,21 +575,21 @@
 												<li class="kodory-mini-cart-item mini_cart_item">
 													<a href="#" class="remove remove_from_cart_button">×</a>
 													<a href="#">
-														<img src="{{ asset('assets/landing/images/apro134-1-600x778.jpg') }}" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">T-shirt with skirt – Pink&nbsp;
+														<img src="assets/landing/images/apro134-1-600x778.jpg" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">T-shirt with skirt – Pink&nbsp;
 													</a>
 													<span class="quantity">1 × <span class="kodory-Price-amount amount"><span class="kodory-Price-currencySymbol">$</span>150.00</span></span>
 												</li>
 												<li class="kodory-mini-cart-item mini_cart_item">
 													<a href="#" class="remove remove_from_cart_button">×</a>
 													<a href="#">
-														<img src="{{ asset('assets/images/apro1113-600x778.jpg') }}" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">Ethereal Toys&nbsp;
+														<img src="assets/landing/images/apro1113-600x778.jpg" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">Ethereal Toys&nbsp;
 													</a>
 													<span class="quantity">1 × <span class="kodory-Price-amount amount"><span class="kodory-Price-currencySymbol">$</span>129.00</span></span>
 												</li>
 												<li class="kodory-mini-cart-item mini_cart_item">
 													<a href="#" class="remove remove_from_cart_button">×</a>
 													<a href="#">
-														<img src="{{ asset('assets/images/apro201-1-600x778.jpg') }}" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">Red Car&nbsp;
+														<img src="assets/landing/images/apro201-1-600x778.jpg" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">Red Car&nbsp;
 													</a>
 													<span class="quantity">1 × <span class="kodory-Price-amount amount"><span class="kodory-Price-currencySymbol">$</span>139.00</span></span>
 												</li>
@@ -596,7 +603,7 @@
 											</p>
 										</div>
 									</div>
-								</div>
+								</div> --}}
 							</div>
 						</div>
 					</div>
@@ -650,14 +657,14 @@
 			<ul class="wpml-menu">
 				<li class="menu-item kodory-dropdown block-language">
 					<a href="#" data-kodory="kodory-dropdown">
-						<img src="{{ asset('assets/landing/images/en.png') }}" alt="en" width="18" height="12">
+						<img src="assets/landing/images/en.png" alt="en" width="18" height="12">
 						English
 					</a>
 					<span class="toggle-submenu"></span>
 					<ul class="sub-menu">
 						<li class="menu-item">
 							<a href="#">
-								<img src="{{ asset('assets/landing/images/it.png') }}" alt="it" width="18" height="12">
+								<img src="assets/landing/images/it.png" alt="it" width="18" height="12">
 								Italiano
 							</a>
 						</li>
@@ -681,7 +688,7 @@
 		</div>
 		<div class="header-mobile-mid">
 			<div class="header-logo">
-				<a href="index-2.html"><img alt="Kodory" src="{{ asset('assets/images/logo.png') }}" class="logo"></a>
+				<a href="index-2.html"><img alt="Kodory" src="assets/landing/images/logo.png" class="logo"></a>
 			</div>
 		</div>
 		<div class="header-mobile-right">
@@ -726,21 +733,21 @@
 									<li class="kodory-mini-cart-item mini_cart_item">
 										<a href="#" class="remove remove_from_cart_button">×</a>
 										<a href="#">
-											<img src="{{ asset('assets/landing/images/apro134-1-600x778.jpg') }}" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">T-shirt with skirt – Pink&nbsp;
+											<img src="assets/landing/images/apro134-1-600x778.jpg" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">T-shirt with skirt – Pink&nbsp;
 										</a>
 										<span class="quantity">1 × <span class="kodory-Price-amount amount"><span class="kodory-Price-currencySymbol">$</span>150.00</span></span>
 									</li>
 									<li class="kodory-mini-cart-item mini_cart_item">
 										<a href="#" class="remove remove_from_cart_button">×</a>
 										<a href="#">
-											<img src="{{ asset('assets/landing/images/apro1113-600x778.jpg') }}" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">Ethereal Toys&nbsp;
+											<img src="assets/landing/images/apro1113-600x778.jpg" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">Ethereal Toys&nbsp;
 										</a>
 										<span class="quantity">1 × <span class="kodory-Price-amount amount"><span class="kodory-Price-currencySymbol">$</span>129.00</span></span>
 									</li>
 									<li class="kodory-mini-cart-item mini_cart_item">
 										<a href="#" class="remove remove_from_cart_button">×</a>
 										<a href="#">
-											<img src="{{ asset('assets/landing/images/apro201-1-600x778.jpg') }}" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">Red Car&nbsp;
+											<img src="assets/landing/images/apro201-1-600x778.jpg" class="attachment-kodory_thumbnail size-kodory_thumbnail" alt="img" width="600" height="778">Red Car&nbsp;
 										</a>
 										<span class="quantity">1 × <span class="kodory-Price-amount amount"><span class="kodory-Price-currencySymbol">$</span>139.00</span></span>
 									</li>
@@ -764,7 +771,7 @@
 	<div class="slide-home-03">
 		<div class="response-product product-list-owl owl-slick equal-container better-height" data-slick="{&quot;arrows&quot;:false,&quot;slidesMargin&quot;:0,&quot;dots&quot;:true,&quot;infinite&quot;:false,&quot;speed&quot;:300,&quot;slidesToShow&quot;:1,&quot;rows&quot;:1}" data-responsive="[{&quot;breakpoint&quot;:480,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:768,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:992,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:1500,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesMargin&quot;:&quot;0&quot;}}]">
 			<div class="slide-wrap">
-				<img src="{{ asset('assets/landing/images/slide31.jpg') }}" alt="image">
+				<img src="assets/landing/images/slide31.jpg" alt="image">
 				<div class="slide-info">
 					<div class="container">
 						<div class="slide-inner">
@@ -777,7 +784,7 @@
 				</div>
 			</div>
 			<div class="slide-wrap">
-				<img src="{{ asset('assets/landing/images/slide32.jpg') }}" alt="image">
+				<img src="assets/landing/images/slide32.jpg" alt="image">
 				<div class="slide-info">
 					<div class="container">
 						<div class="slide-inner">
@@ -790,7 +797,7 @@
 				</div>
 			</div>
 			<div class="slide-wrap">
-				<img src="{{ asset('assets/landing/images/slide33.jpg') }}" alt="image">
+				<img src="assets/landing/images/slide33.jpg" alt="image">
 				<div class="slide-info">
 					<div class="container">
 						<div class="slide-inner">
@@ -810,7 +817,7 @@
 				<div class="kodory-banner style-08 left-center">
 					<div class="banner-inner">
 						<figure class="banner-thumb">
-							<img src="{{ asset('assets/landing/images/banner31.jpg') }}" class="attachment-full size-full" alt="img">
+							<img src="assets/landing/images/banner31.jpg" class="attachment-full size-full" alt="img">
 						</figure>
 						<div class="banner-info ">
 							<div class="banner-content">
@@ -834,7 +841,7 @@
 				<div class="kodory-banner style-09 left-center">
 					<div class="banner-inner">
 						<figure class="banner-thumb">
-							<img src="{{ asset('assets/landing/images/banner32.jpg') }}" class="attachment-full size-full" alt="img">
+							<img src="assets/landing/images/banner32.jpg" class="attachment-full size-full" alt="img">
 						</figure>
 						<div class="banner-info ">
 							<div class="banner-content">
@@ -858,7 +865,7 @@
 				<div class="kodory-banner style-10 left-center">
 					<div class="banner-inner">
 						<figure class="banner-thumb">
-							<img src="{{ asset('assets/landing/images/banner33.jpg') }}" class="attachment-full size-full" alt="img">
+							<img src="assets/landing/images/banner33.jpg" class="attachment-full size-full" alt="img">
 						</figure>
 						<div class="banner-info ">
 							<div class="banner-content">
@@ -894,14 +901,20 @@
 			</div>
 			<div class="kodory-products style-04">
 				<div class="response-product product-list-grid row auto-clear equal-container better-height ">
+					@foreach($stok as $key => $val)
 					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-25 product type-product status-publish has-post-thumbnail product_cat-light product_cat-chair product_cat-specials product_tag-light product_tag-sock first instock sale featured shipping-taxable purchasable product-type-simple">
-						<div class="product-inner tooltip-top tooltip-all-top">
-							<div class="product-thumb">
+						<div class="product-inner tooltip-top tooltip-all-top" style="min-height:20rem; max-height:20rem;">
+							<div class="product-thumb" style="height:12rem;">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro151-1-270x350.jpg') }}" alt="Modern Platinum" width="270" height="350">
+									{{-- <img class="img-responsive" src="assets/landing/images/apro151-1-270x350.jpg" alt="Modern Platinum" width="270" height="350"> --}}
+									@if(!empty($val->foto))
+									<img class="img-responsive" src="{{asset('storage/'.$val->foto)}}" alt="Modern Platinum" height="350" style="max-height:12rem; width: auto;">
+									@else
+									<img class="img-responsive" src="{{asset('assets/landing/images/default.png')}}" alt="Modern Platinum"  height="350" style="max-height:12rem; width: auto;">
+									@endif
 								</a>
 								<div class="flash">
-									<span class="onsale"><span class="number">-11%</span></span>
+									{{-- <span class="onsale"><span class="number">-11%</span></span> --}}
 									<span class="onnew"><span class="text">New</span></span>
 								</div>
 								<div class="group-button">
@@ -921,19 +934,23 @@
 							</div>
 							<div class="product-info">
 								<h3 class="product-name product_title">
-									<a href="single-product.html">Modern Platinum</a>
+									<a href="single-product.html">{{ucwords($val->produk->nama_produk)}}</a>
 								</h3>
 								<span class="price">
+									{{-- harga asli start --}}
 									<del>
 										<span class="kodory-Price-amount amount">
-											<span class="kodory-Price-currencySymbol">$</span>89.00
+											{{-- <span class="kodory-Price-currencySymbol">$</span>89.00 --}}
 										</span>
 									</del>
+									{{-- harga asli end --}}
+									{{-- harga setelah diskon start --}}
 									<ins>
 										<span class="kodory-Price-amount amount">
-											<span class="kodory-Price-currencySymbol">$</span>79.00
+											<span class="kodory-Price-currencySymbol"></span>{{rupiah($val->harga)}}
 										</span>
 									</ins>
+									{{-- harga setelah diskon end --}}
 								</span>
 								<div class="rating-wapper nostar">
 									<div class="star-rating">
@@ -944,11 +961,13 @@
 							</div>
 						</div>
 					</div>
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-23 product type-product status-publish has-post-thumbnail product_cat-chair product_cat-lamp product_cat-sofas product_tag-hat  instock shipping-taxable purchasable product-type-variable has-default-attributes">
+					@endforeach
+
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-23 product type-product status-publish has-post-thumbnail product_cat-chair product_cat-lamp product_cat-sofas product_tag-hat  instock shipping-taxable purchasable product-type-variable has-default-attributes">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro171-1-270x350.jpg') }}" alt="Cute Girl Shirt" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro171-1-270x350.jpg" alt="Cute Girl Shirt" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onnew"><span class="text">New</span></span>
@@ -1027,13 +1046,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-32 product type-product status-publish has-post-thumbnail product_cat-light product_cat-chair product_cat-sofas product_tag-hat product_tag-sock last instock sale featured shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-32 product type-product status-publish has-post-thumbnail product_cat-light product_cat-chair product_cat-sofas product_tag-hat product_tag-sock last instock sale featured shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro71-1-270x350.jpg') }}" alt="Kid Backpack" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro71-1-270x350.jpg" alt="Kid Backpack" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onsale"><span class="number">-18%</span></span>
@@ -1078,13 +1097,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-20 product type-product status-publish has-post-thumbnail product_cat-light product_cat-new-arrivals product_cat-specials product_tag-table product_tag-hat product_tag-sock first instock sale featured shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-20 product type-product status-publish has-post-thumbnail product_cat-light product_cat-new-arrivals product_cat-specials product_tag-table product_tag-hat product_tag-sock first instock sale featured shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro201-1-270x350.jpg') }}" alt="Red Car" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro201-1-270x350.jpg" alt="Red Car" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onsale"><span class="number">-7%</span></span>
@@ -1130,13 +1149,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-36 product type-product status-publish has-post-thumbnail product_cat-table product_cat-bed product_tag-light product_tag-table product_tag-sock  instock sale shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-36 product type-product status-publish has-post-thumbnail product_cat-table product_cat-bed product_tag-light product_tag-table product_tag-sock  instock sale shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro51012-1-270x350.jpg') }}" alt="Dazzling Toys" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro51012-1-270x350.jpg" alt="Dazzling Toys" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onsale"><span class="number">-21%</span></span>
@@ -1181,13 +1200,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-49 product type-product status-publish has-post-thumbnail product_cat-light product_cat-bed product_cat-sofas product_tag-multi product_tag-lamp last instock shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-49 product type-product status-publish has-post-thumbnail product_cat-light product_cat-bed product_cat-sofas product_tag-multi product_tag-lamp last instock shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro302-270x350.jpg') }}" alt="Cute Shoes" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro302-270x350.jpg" alt="Cute Shoes" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onnew"><span class="text">New</span></span>
@@ -1224,13 +1243,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-93 product type-product status-publish has-post-thumbnail product_cat-light product_cat-table product_cat-new-arrivals product_tag-table product_tag-sock first instock shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-93 product type-product status-publish has-post-thumbnail product_cat-light product_cat-table product_cat-new-arrivals product_tag-table product_tag-sock first instock shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro13-1-270x350.jpg') }}" alt="Hello Shirt" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro13-1-270x350.jpg" alt="Hello Shirt" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onnew"><span class="text">New</span></span>
@@ -1267,13 +1286,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-28 product type-product status-publish has-post-thumbnail product_cat-light product_cat-chair product_cat-sofas product_tag-light product_tag-sock  instock sale featured shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-28 product type-product status-publish has-post-thumbnail product_cat-light product_cat-chair product_cat-sofas product_tag-light product_tag-sock  instock sale featured shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro1211-2') }}-270x350.jpg" alt="Blue Shoes" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro1211-2-270x350.jpg" alt="Blue Shoes" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onsale"><span class="number">-14%</span></span>
@@ -1318,13 +1337,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-22 product type-product status-publish has-post-thumbnail product_cat-table product_cat-bed product_cat-lamp product_tag-table product_tag-hat product_tag-sock last instock featured downloadable shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-22 product type-product status-publish has-post-thumbnail product_cat-table product_cat-bed product_cat-lamp product_tag-table product_tag-hat product_tag-sock last instock featured downloadable shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro181-2') }}-270x350.jpg" alt="Soccer Shoes" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro181-2-270x350.jpg" alt="Soccer Shoes" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onnew"><span class="text">New</span></span>
@@ -1361,13 +1380,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-30 product type-product status-publish has-post-thumbnail product_cat-light product_cat-bed product_cat-specials product_tag-light product_tag-table product_tag-sock first instock featured downloadable shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-30 product type-product status-publish has-post-thumbnail product_cat-light product_cat-bed product_cat-specials product_tag-light product_tag-table product_tag-sock first instock featured downloadable shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro101-1') }}-270x350.jpg" alt="Penguin Hoodie" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro101-1-270x350.jpg" alt="Penguin Hoodie" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onnew"><span class="text">New</span></span>
@@ -1404,13 +1423,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-35 product type-product status-publish has-post-thumbnail product_cat-chair product_cat-new-arrivals product_cat-lamp product_tag-light product_tag-hat product_tag-sock  instock shipping-taxable purchasable product-type-simple">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-35 product type-product status-publish has-post-thumbnail product_cat-chair product_cat-new-arrivals product_cat-lamp product_tag-light product_tag-hat product_tag-sock  instock shipping-taxable purchasable product-type-simple">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro41-1') }}-270x350.jpg" alt="Cute Shoes" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro41-1-270x350.jpg" alt="Cute Shoes" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onnew">
@@ -1449,13 +1468,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-24 product type-product status-publish has-post-thumbnail product_cat-chair product_cat-table product_cat-new-arrivals product_tag-light product_tag-hat product_tag-sock last instock featured shipping-taxable purchasable product-type-variable has-default-attributes">
+					{{-- <div class="product-item best-selling style-04 rows-space-30 col-bg-3 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-ts-6 post-24 product type-product status-publish has-post-thumbnail product_cat-chair product_cat-table product_cat-new-arrivals product_tag-light product_tag-hat product_tag-sock last instock featured shipping-taxable purchasable product-type-variable has-default-attributes">
 						<div class="product-inner tooltip-top tooltip-all-top">
 							<div class="product-thumb">
 								<a class="thumb-link" href="single-product.html">
-									<img class="img-responsive" src="{{ asset('assets/landing/images/apro161-1') }}-270x350.jpg" alt="Kid Backpack" width="270" height="350">
+									<img class="img-responsive" src="assets/landing/images/apro161-1-270x350.jpg" alt="Kid Backpack" width="270" height="350">
 								</a>
 								<div class="flash">
 									<span class="onnew"><span class="text">New</span></span>
@@ -1532,7 +1551,7 @@
 						<div class="shop-all">
 							<a target=" _blank" href="shop.html">Discovery All</a>
 						</div>
-					</div>
+					</div> --}}
 				</div>
 			</div>
 			<div class="section-0181">
@@ -1559,7 +1578,7 @@
 								<div class="kodory-testimonial style-01">
 									<div class="testimonial-inner">
 										<div class="thumb">
-											<img src="{{ asset('assets/landing/images/avatar1.png') }}" class="attachment-full size-full" alt="img" width="97" height="97">
+											<img src="assets/landing/images/avatar1.png" class="attachment-full size-full" alt="img" width="97" height="97">
 										</div>
 										<p class="desc">Lore ipsum dolor sit amet consectetur elit sagittis, quisque ut integer penatibus eleifend erat porttitor, viverra tristique dapibus fermentum. </p>
 										<div class="testimonial-info">
@@ -1577,7 +1596,7 @@
 								<div class="kodory-testimonial style-01">
 									<div class="testimonial-inner">
 										<div class="thumb">
-											<img src="{{ asset('assets/landing/images/avatar3.png') }}" class="attachment-full size-full" alt="img" width="97" height="97">
+											<img src="assets/landing/images/avatar3.png" class="attachment-full size-full" alt="img" width="97" height="97">
 										</div>
 										<p class="desc">Lore ipsum dolor sit amet consectetur elit sagittis, quisque ut integer penatibus eleifend erat porttitor, viverra tristique dapibus fermentum. </p>
 										<div class="testimonial-info">
@@ -1595,7 +1614,7 @@
 								<div class="kodory-testimonial style-01">
 									<div class="testimonial-inner">
 										<div class="thumb">
-											<img src="{{ asset('assets/landing/images/avatar2.png') }}" class="attachment-full size-full" alt="img" width="97" height="97">
+											<img src="assets/landing/images/avatar2.png" class="attachment-full size-full" alt="img" width="97" height="97">
 										</div>
 										<p class="desc">Lore ipsum dolor sit amet consectetur elit sagittis, quisque ut integer penatibus eleifend erat porttitor, viverra tristique dapibus fermentum. </p>
 										<div class="testimonial-info">
@@ -1635,7 +1654,7 @@
 						<div class="post-inner">
 							<div class="post-thumb">
 								<a href="single-post.html" tabindex="0">
-									<img src="{{ asset('assets/landing/images/blogpost1-370x330') }}.jpg" class="img-responsive attachment-370x330 size-370x330" alt="img" width="370" height="330">
+									<img src="assets/landing/images/blogpost1-370x330.jpg" class="img-responsive attachment-370x330 size-370x330" alt="img" width="370" height="330">
 								</a>
 							</div>
 							<div class="post-content">
@@ -1662,7 +1681,7 @@
 						<div class="post-inner">
 							<div class="post-thumb">
 								<a href="single-post.html" tabindex="0">
-									<img src="{{ asset('assets/landing/images/blogpost5-370x330') }}.jpg"
+									<img src="assets/landing/images/blogpost5-370x330.jpg"
 									class="img-responsive attachment-370x330 size-370x330" alt="img" width="370"
 									height="330">
 								</a>
@@ -1691,7 +1710,7 @@
 						<div class="post-inner">
 							<div class="post-thumb">
 								<a href="single-post.html" tabindex="0">
-									<img src="{{ asset('assets/landing/images/blogpost9-370x330') }}.jpg" class="img-responsive attachment-370x330 size-370x330" alt="img" width="370" height="330">
+									<img src="assets/landing/images/blogpost9-370x330.jpg" class="img-responsive attachment-370x330 size-370x330" alt="img" width="370" height="330">
 								</a>
 							</div>
 							<div class="post-content">
@@ -1716,7 +1735,7 @@
 						<div class="post-inner">
 							<div class="post-thumb">
 								<a href="single-post.html" tabindex="-1">
-									<img src="{{ asset('assets/landing/images/blogpost4-370x330') }}.jpg" class="img-responsive attachment-370x330 size-370x330" alt="img" width="370" height="330">
+									<img src="assets/landing/images/blogpost4-370x330.jpg" class="img-responsive attachment-370x330 size-370x330" alt="img" width="370" height="330">
 								</a>
 							</div>
 							<div class="post-content">
@@ -1743,7 +1762,7 @@
 						<div class="post-inner">
 							<div class="post-thumb">
 								<a href="single-post.html" tabindex="-1">
-									<img src="{{ asset('assets/landing/images/blogpost2-370x330') }}.jpg" class="img-responsive attachment-370x330 size-370x330" alt="img" width="370" height="330">
+									<img src="assets/landing/images/blogpost2-370x330.jpg" class="img-responsive attachment-370x330 size-370x330" alt="img" width="370" height="330">
 								</a>
 							</div>
 							<div class="post-content">
@@ -1784,7 +1803,7 @@
 			<div class="instagram-owl owl-slick" data-slick="{&quot;arrows&quot;:false,&quot;slidesMargin&quot;:0,&quot;dots&quot;:false,&quot;infinite&quot;:false,&quot;speed&quot;:300,&quot;slidesToShow&quot;:6,&quot;rows&quot;:1}" data-responsive="[{&quot;breakpoint&quot;:480,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:768,&quot;settings&quot;:{&quot;slidesToShow&quot;:3,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:992,&quot;settings&quot;:{&quot;slidesToShow&quot;:4,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:5,&quot;slidesMargin&quot;:&quot;0&quot;}},{&quot;breakpoint&quot;:1500,&quot;settings&quot;:{&quot;slidesToShow&quot;:6,&quot;slidesMargin&quot;:&quot;0&quot;}}]">
 				<div class="rows-space-0">
 					<a target="_blank" href="#" class="item  " tabindex="0">
-						<img class="img-responsive lazy" src="{{ asset('assets/landing/images/insta1.jpg') }}" alt="Home 03">
+						<img class="img-responsive lazy" src="assets/landing/images/insta1.jpg" alt="Home 03">
 						<span class="instagram-info">
 							<span class="social-wrap">
 								<span class="social-info">1
@@ -1799,7 +1818,7 @@
 				</div>
 				<div class="rows-space-0">
 					<a target="_blank" href="#" class="item  " tabindex="0">
-						<img class="img-responsive lazy" src="{{ asset('assets/landing/images/insta2.jpg') }}" alt="Home 03">
+						<img class="img-responsive lazy" src="assets/landing/images/insta2.jpg" alt="Home 03">
 						<span class="instagram-info">
 							<span class="social-wrap">
 								<span class="social-info">1
@@ -1814,7 +1833,7 @@
 				</div>
 				<div class="rows-space-0">
 					<a target="_blank" href="#" class="item  " tabindex="0">
-						<img class="img-responsive lazy" src="{{ asset('assets/landing/images/insta3.jpg') }}" alt="Home 03">
+						<img class="img-responsive lazy" src="assets/landing/images/insta3.jpg" alt="Home 03">
 						<span class="instagram-info">
 							<span class="social-wrap">
 								<span class="social-info">1
@@ -1829,7 +1848,7 @@
 				</div>
 				<div class="rows-space-0">
 					<a target="_blank" href="#" class="item  " tabindex="0">
-						<img class="img-responsive lazy" src="{{ asset('assets/landing/images/insta4.jpg') }}" alt="Home 03">
+						<img class="img-responsive lazy" src="assets/landing/images/insta4.jpg" alt="Home 03">
 						<span class="instagram-info">
 							<span class="social-wrap">
 								<span class="social-info">1
@@ -1844,7 +1863,7 @@
 				</div>
 				<div class="rows-space-0">
 					<a target="_blank" href="#" class="item  " tabindex="0">
-						<img class="img-responsive lazy" src="{{ asset('assets/landing/images/insta5.jpg') }}" alt="Home 03">
+						<img class="img-responsive lazy" src="assets/landing/images/insta5.jpg" alt="Home 03">
 						<span class="instagram-info">
 							<span class="social-wrap">
 								<span class="social-info">1
@@ -1859,7 +1878,7 @@
 				</div>
 				<div class="rows-space-0">
 					<a target="_blank" href="#" class="item  " tabindex="0">
-						<img class="img-responsive lazy" src="{{ asset('assets/landing/images/insta6.jpg') }}" alt="Home 03">
+						<img class="img-responsive lazy" src="assets/landing/images/insta6.jpg" alt="Home 03">
 						<span class="instagram-info">
 							<span class="social-wrap">
 								<span class="social-info">1
@@ -1874,7 +1893,7 @@
 				</div>
 				<div class="rows-space-0">
 					<a target="_blank" href="#" class="item  " tabindex="0">
-						<img class="img-responsive lazy" src="{{ asset('assets/landing/images/insta7.jpg') }}" alt="Home 03">
+						<img class="img-responsive lazy" src="assets/landing/images/insta7.jpg" alt="Home 03">
 						<span class="instagram-info">
 							<span class="social-wrap">
 								<span class="social-info">1
@@ -1889,7 +1908,7 @@
 				</div>
 				<div class="rows-space-0">
 					<a target="_blank" href="#" class="item  " tabindex="0">
-						<img class="img-responsive lazy" src="{{ asset('assets/landing/images/insta8.jpg') }}" alt="Home 03">
+						<img class="img-responsive lazy" src="assets/landing/images/insta8.jpg" alt="Home 03">
 						<span class="instagram-info">
 							<span class="social-wrap">
 								<span class="social-info">1
@@ -1923,7 +1942,7 @@
 						<div class="newsletter-form-inner">
 							<input class="email email-newsletter" name="email" placeholder="Enter your email ..."
 							type="email">
-							<a href="#" class="button btn-submit submit-newsletter">
+							<a href='javascript:void(0)' onclick="disable()" class="button btn-submit submit-newsletter">
 								<span class="text">Subscribe</span>
 							</a>
 						</div>
@@ -1934,18 +1953,31 @@
 				<div class="content-socials">
 					<ul class="socials-list">
 						<li>
-							<a href="https://facebook.com/" target="_blank">
+							@if($facebook!="")
+								<a href="{{$facebook}}" target="_blank">
+							@else
+								<a href="javascript:void(0)" onclick="disable()" target="_blank">
+							@endif
 								<i class="fa fa-facebook"></i>
 							</a>
 						</li>
 						<li>
-							<a href="https://www.instagram.com/" target="_blank">
+							@if($instagram!="")
+								<a href="{{$instagram}}" target="_blank">
+							@else
+								<a href="javascript:void(0)" onclick="disable()" target="_blank">
+							@endif
 								<i class="fa fa-instagram"></i>
 							</a>
 						</li>
 						<li>
-							<a href="https://twitter.com/" target="_blank">
-								<i class="fa fa-twitter"></i>
+							@if($phone!="")
+								<a href="{{$whatsapp}}" target="_blank">
+							@else
+								<a href='javascript:void(0)' onclick="disable()" target="_blank">
+							@endif
+								{{-- <i class="fa fa-twitter"></i> --}}
+								<i class="fa fa-whatsapp"></i>
 							</a>
 						</li>
 					</ul>
@@ -2025,4 +2057,11 @@
 <a href="#" class="backtotop active">
 	<i class="fa fa-angle-double-up"></i>
 </a>
+<script type="text/javascript">
+	function disable(){
+		return false
+	}
+</script>
 @endsection
+@push('script')
+@endpush

@@ -1,4 +1,5 @@
-<script src="assets/landing/js/jquery-1.12.4.min.js"></script>
+{{-- <script src="assets/landing/js/jquery-1.12.4.min.js"></script> --}}
+<script src="assets/landing/js/jquery-1.9.0.min.js"></script>
 <script src="assets/landing/js/bootstrap.min.js"></script>
 <script src="assets/landing/js/chosen.min.js"></script>
 <script src="assets/landing/js/countdown.min.js"></script>

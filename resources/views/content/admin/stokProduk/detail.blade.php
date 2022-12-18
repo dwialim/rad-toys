@@ -13,7 +13,7 @@
 	}
 	.responsive {
 		width: 100%;
-		max-width: 500px;
+		max-width: 300px;
 		height: auto;
 	}
 </style>
@@ -93,6 +93,8 @@
 							<a class="pan" data-big="{{asset('storage/'.$data->foto)}}" href="">
 								<img src="{{asset('storage/'.$data->foto)}}" class="img-thumbnail mx-auto d-block responsive">
 							</a>
+							@else
+								<img src="{{asset('assets/landing/images/default.png')}}" class="img-thumbnail mx-auto d-block responsive">
 							@endif
 						</div>
 						<div class="col-sm-3"></div>

@@ -20,11 +20,15 @@
 		$hasil_rupiah = str_replace(',', '.', $hasil_rupiah);
 		return $hasil_rupiah;
 	}
+	$nama   = !empty($data)?$data->nama:'';
+	$nomor  = !empty($data)?(!empty($data->nohp)?$data->nohp:''):'';
+	$alamat = !empty($data)?(!empty($data->alamat)?$data->alamat:''):'';
+	$pesan  = !empty($data)?$data->pesan:'';
 ?>
 
 <div class="card {{($page=='Tambah')?'card-info':'card-primary'}}">
 	<div class="card-header">
-		<h3 class="card-title">Form {{$page}} Stok</h3>
+		<h3 class="card-title">Form {{$page}} Review Customer</h3>
 	</div>
 	<div class="card-body">
 		<div class="row">
@@ -33,62 +37,34 @@
 					<input type="hidden" name="id" id="idProduk" class="form-control" value="{{(!empty($data))?$data->id:''}}">
 					<div class="form-group row mb-3">
 						<div class="col-sm-6">
-							<label for="kodeStok" class="col-form-label">Kode Stok</label>
-							<input type="text" name="kodeStok" class="form-control" id="kodeStok" placeholder="{{!empty($data)?$data->kode_stok:$kode}}" disabled readonly>
+							<label for="namaProduk" class="col-form-label">Nama<span class="text-red">*</span></label>
+							<input type="text" name="nama" class="form-control" placeholder="Nama Customer" value="{{ucwords($nama)}}">
 						</div>
 						<div class="col-sm-6">
-							<label for="publish" class="col-form-label">Publish<span class="text-red">*</span></label>
-							<select class="form-control" name="publish" id="publish">
-								<option value="first" selected disabled>--Pilih Status--</option>
-								<option value="0" @if(!empty($data)) {{ ($data->publish==0)?'selected':'' }} @endif>Private</option>
-								<option value="1" @if(!empty($data)) {{ ($data->publish==1)?'selected':'' }} @endif>Public</option>
-							</select>
+							<label for="namaProduk" class="col-form-label">No. HP</label>
+							<input type="text" name="nama" class="form-control" placeholder="No HP Customer" value="{{$nomor}}">
 						</div>
 					</div>
+
 					<div class="form-group row mb-3">
-						<div class="col-sm-6">
-							<label for="namaProduk" class="col-form-label">Nama Produk<span class="text-red">*</span></label>
-							<select class="form-control" name="namaProduk" id="namaProduk">
-								<option value="first" selected disabled>--Pilih Produk--</option>
-								@if(!empty($produk))
-								@foreach($produk as $key => $val)
-								<option value="{{$val->id}}" @if(!empty($data)){{$data->produk_id==$val->id?'selected':''}}@endif>
-									{{$val->nama_produk}}
-								</option>
-								@endforeach
-								@endif
-							</select>
+						<div class="col-sm-12">
+							<label for="alamat" class="col-form-label">Alamat</label>
+							<textarea class="form-control" name="alamat" placeholder="Alamat Customer" rows="3">{{$alamat}}</textarea>
 						</div>
-						<div class="col-sm-6">
-							<label for="kategoriProduk" class="col-form-label">Kategori Produk<span class="text-red">*</span></label>
-							<select class="form-control" name="kategoriProduk" id="kategoriProduk">
-								<option value="first" selected disabled>--Pilih Kategori--</option>
-								@if(!empty($kategori))
-								@foreach($kategori as $key => $val)
-								<option value="{{$val->id}}" @if(!empty($data)){{$data->kategori_id==$val->id?'selected':''}}@endif>
-									{{$val->nama_kategori}}
-								</option>
-								@endforeach
-								@endif
-							</select>
+					</div>
+
+					<div class="form-group row mb-3">
+						<div class="col-sm-12">
+							<label for="alamat" class="col-form-label">Pesan<span class="text-red">*</span></label>
+							<textarea class="form-control" name="alamat" placeholder="Pesan Customer" rows="3">{{$pesan}}</textarea>
 						</div>
 					</div>
 					<div class="form-group row mb-3">
 						<div class="col-sm-6 mb-2">
-							<label for="qtyProduk" class="col-form-label">QTY Produk<span class="text-red">*</span></label>
-							<input type="number" name="qtyProduk" class="form-control" id="qtyProduk" placeholder="QTY Produk" min="0" value="{{!empty($data)?$data->qty:''}}">
-						</div>
-						<div class="col-sm-6">
-							<label for="hargaProduk" class="col-form-label">Harga Produk<span class="text-red">*</span></label>
-							<input type="text" name="hargaProduk" onkeyup="ubahFormat(this)" class="form-control" id="hargaProduk" placeholder="harga Produk" value="{{!empty($data)?rupiah($data->harga):''}}">
-						</div>
-					</div>
-					<div class="form-group row mb-3">
-						<div class="col-sm-6 mb-2">
-							<label for="customFile" class="col-form-label">Upload Gambar</label>
+							<label for="customFile" class="col-form-label">Foto Customer</label>
 							<div class="custom-file">
 								<input type="file" name="image" class="custom-file-input" id="customFile" onchange="loadFile(event)">
-								<label class="custom-file-label" for="customFile">Pilih Gambar</label>
+								<label class="custom-file-label" for="customFile">Pilih Foto</label>
 							</div>
 						</div>
 						<div class="col-sm-6">
@@ -138,17 +114,17 @@
 		}
 	})
 
-	$('#namaProduk').select2({
-		theme: 'bootstrap4'
-	})
+	// $('#namaProduk').select2({
+	// 	theme: 'bootstrap4'
+	// })
 
-	$('#kategoriProduk').select2({
-		theme:'bootstrap4'
-	})
+	// $('#kategoriProduk').select2({
+	// 	theme:'bootstrap4'
+	// })
 
-	$(document).on('select2:open',()=>{
-		document.querySelector('.select2-search__field').focus()
-	})
+	// $(document).on('select2:open',()=>{
+	// 	document.querySelector('.select2-search__field').focus()
+	// })
 
 	$(".btn-cancel").click(function(e){
 		e.preventDefault()

@@ -50,6 +50,7 @@
 									<th> Kategori</th>
 									<th> QTY</th>
 									<th> Harga Produk</th>
+									<th> Status Publish</th>
 									<th> Action</th>
 								</tr>
 							</thead>
@@ -101,6 +102,7 @@
 						</div>
 					`
 				}},
+				{data:"publish", name:"publish"},
 				{data:"action", name:"action"}
 			]
 		})

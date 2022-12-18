@@ -8,15 +8,16 @@ use App\Http\Controllers\admin\stokProdukController;
 use App\Http\Controllers\admin\kategoriController;
 use App\Http\Controllers\admin\profileController;
 use App\Http\Controllers\admin\userController;
+use App\Http\Controllers\admin\reviewCustomerController;
 
-Route::get('/landing',function(){
+Route::get('/',function(){
 	return redirect('/rad-toys');
 });
 Route::group(['prefix'=>'rad-toys'],function(){
-	Route::get('/',[landingController::class, 'main']);
+	Route::get('/',[LandingController::class, 'main'])->name('home');
+	// Route::get('/',[landingController::class, 'main']);
 });
 
-Route::get('/',[LandingController::class, 'main'])->name('home');
 Route::get('/login',[LandingController::class, 'login'])->name('login')->middleware('rd_login');
 Route::get('/register',[LandingController::class, 'register'])->name('register')->middleware('rd_login');
 Route::get('/dologin',[LandingController::class, 'dologin'])->name('dologin');
@@ -92,6 +93,11 @@ Route::middleware('nd_login')->group(function(){
 			Route::post('/destroy',[stokProdukController::class, 'destroy'])->name('destroyStokProduk');
 			Route::post('/detail',[stokProdukController::class, 'detail'])->name('detailStokProduk');
 			Route::post('/getStok',[stokProdukController::class, 'getStok'])->name('getStokProduk');
+		});
+
+		Route::group(['prefix'=>'review-customer'],function(){
+			Route::get('/',[reviewCustomerController::class, 'main'])->name('mainCustomer');
+			Route::post('/form',[reviewCustomerController::class, 'form'])->name('formReviewCust');
 		});
 	});
 
