@@ -3135,6 +3135,7 @@ th, td {
     -moz-transition: padding 0.5s ease 0s, height 0.5s ease 0s;
     -o-transition: padding 0.5s ease 0s, height 0.5s ease 0s;
     transition: padding 0.5s ease 0s, height 0.5s ease 0s;
+    transform: scale(.5);
 }
 /* ==========================================================================
 3.6 HEADER STICKY
